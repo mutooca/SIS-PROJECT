@@ -5,10 +5,16 @@ import { IoTrophyOutline } from 'react-icons/io5'
 import CardOverView from '../components/CardOverview'
 import { CalendarIcon, HeartIcon, Users2Icon } from 'lucide-react'
 import Title from '../components/Title'
+import Header from '../layout/Header'
 
 export default function Home(){
     return(
         <div className=''>
+            <div className="h-16">
+                    <Header/>
+            </div>
+                            
+
             <div className="relative h-[80vh] max-w-screen hoverflow-hidden">
                 <div className='inset-0 h-[80vh]  bg-blue-400 absolute'>
                     <img src={img} alt="" className='w-full h-full object-cover opacity-10' />
@@ -27,7 +33,7 @@ export default function Home(){
             </div>
             <div className='bg-indigo-50 max-w-full'>
                 <div className=' flex justify-center py-10'>
-                    <div className=' max-w-7xl grid grid-cols-4 gap-8'>
+                    <div className=' max-w-7xl grid grid-cols-2 md:grid-cols-4 gap-3'>
                         <CardOverView colorIcon='green' title='15+' text='Anos de Experiência' icon={<IoTrophyOutline size={40}></IoTrophyOutline>} />
                         <CardOverView title='50K+' text='Utentes Registados' icon={<Users2Icon size={40}/>} />
                         <CardOverView title='200+' text='Profissionais de Saúde' icon={<IoTrophyOutline size={40}></IoTrophyOutline>} />
@@ -39,11 +45,11 @@ export default function Home(){
                 <Title title='Especialidades Médicas' descrition='Oferecemos uma ampla gama de especialidades com equipamentos de última geração.'/>
 
                 <div>
-                </div>
+                </div >
                 <div className='grid grid-cols-3 max-w-6xl mx-auto gap-12 mb-20'>
-                    <div className='w-96 h-full rounded-lg hover:shadow-2xl hover:scale-101 transition'>
+                    <div className='w-96 h-full rounded-lg hover:shadow-2xl hover:scale-101 transition ease-in '>
                         <div className='w-96 rounded-t-lg h-44 bg-gradient-to-b from-black to-white'>
-                            <img src={img2} alt="" className='w-96 absolute rounded-t-lg h-44 ' />
+                            <img src={img2} alt="" className='w-full absolute rounded-t-lg h-44 relative' />
                             <span className='relative text-white top-30 left-4'><HeartIcon size={40}/></span>
                         </div>
                         <div className='space-y-3 px-5 bg-white py-4'>

@@ -14,18 +14,23 @@ export default function Header() {
 
         <nav className="flex items-center gap-6">
           <ul className="hidden md:flex gap-6 font-semibold text-zinc-500">
-            <li><a href="">Especialidades</a></li>
-            <li><a href="">Médicos</a></li>
-            <li><a href="">Exames</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/Especialidade">Especialidades</a></li>
+            <li><a href="/Medicos">Médicos</a></li>
+            <li><a href="/Exames">Exames</a></li>
           </ul>
 
           <div className="flex gap-2 items-center">
-            <button className="py-1 px-3 border-2 border-blue-400 text-blue-400 font-semibold rounded-lg hover:bg-blue-50 transition">
+            <a href="/Entrar">
+              <button className="py-1 px-3 border-2 border-blue-400 text-blue-400 font-semibold rounded-lg hover:bg-blue-50 transition">
               Entrar
             </button>
-            <button className="py-1 px-3 bg-blue-400 border-2 border-blue-400 text-white font-semibold rounded-lg hover:bg-blue-500 transition">
-              Registar
-            </button>
+            </a>
+            <a href="/Registar">
+               <button className="py-1 px-3 bg-blue-400 border-2 border-blue-400 text-white font-semibold rounded-lg hover:bg-blue-500 transition">
+               Registar
+               </button>
+            </a>
           </div>
         </nav>
 

@@ -10,11 +10,11 @@ interface props {
 export default function CardEspecialidade({img, type, text}: props){
     return (
         
-       <div className='max-w-92 h-full rounded-b-xl hover:shadow-2xl hover:scale-101 transition border'>
-            <div className='max-w-92 rounded-t-xl h-48'>
+       <div className='max-w-96 h-full rounded-b-xl hover:shadow-2xl hover:scale-101 transition border'>
+            <div className='max-w-96 rounded-t-xl h-48'>
                 <img src={img} alt="" className='w-full rounded-t-xl h-full ' />
             </div>
-            <div className='space-y-3 rounded-b-xl px-5 bg-white py-4'>
+            <div className='space-y-3 rounded-b-xl min-h-56 px-5 bg-white py-4'>
                 <h3 className='font-bold text-2xl'>{type}</h3>
                 <p className='text-justify text-zinc-500'>{text}</p>
                 <button className='flex justify-center items-center w-full font-semibold gap-3 border-2 border-blue-500 p-2 rounded-lg hover:bg-blue-500 text-blue-500 hover:text-white'>

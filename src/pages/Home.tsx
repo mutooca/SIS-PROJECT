@@ -1,11 +1,14 @@
 import { GoArrowRight } from 'react-icons/go'
-import img from '../img/img2.jpeg'
-import img2 from '../img/img1.jpeg'
+import Pediatria from '../img/especialidadesImg/Pediatria.PNG'
+import Cardiologia from '../img/especialidadesImg/Cardiologia.PNG'
+import Ortopedia from '../img/especialidadesImg/Ortopedia.PNG'
+import img from '../img/img1.jpeg'
 import { IoTrophyOutline } from 'react-icons/io5'
 import CardOverView from '../components/CardOverview'
-import { CalendarIcon, HeartIcon, Users2Icon } from 'lucide-react'
+import { CalendarIcon, Users2Icon } from 'lucide-react'
 import Title from '../components/Title'
 import Header from '../layout/Header'
+import CardEspecialidade from '../components/CardEspecialidade'
 
 export default function Home(){
     return(
@@ -46,22 +49,10 @@ export default function Home(){
 
                 <div>
                 </div >
-                <div className='grid grid-cols-3 max-w-6xl mx-auto gap-12 mb-20'>
-                    <div className='w-96 h-full rounded-lg hover:shadow-2xl hover:scale-101 transition ease-in '>
-                        <div className='w-96 rounded-t-lg h-44 bg-gradient-to-b from-black to-white'>
-                            <img src={img2} alt="" className='w-full absolute rounded-t-lg h-44 relative' />
-                            <span className='relative text-white top-30 left-4'><HeartIcon size={40}/></span>
-                        </div>
-                        <div className='space-y-3 px-5 bg-white py-4'>
-                            <h3 className='font-bold text-2xl'>Cardiologia</h3>
-                            <p className='text-justify text-zinc-700'>Cuidados especializados para o coração com tecnologia de monitorização avançada e equipa altamente qualificada.</p>
-                            <button className='flex justify-center items-center w-full font-semibold gap-3 border-2 border-blue-500 p-2 rounded-lg hover:bg-blue-500 text-blue-500 hover:text-white'>
-                                Saber Mais
-                                <GoArrowRight size={17} />
-                            </button>
-                        </div>
-                    </div>
-                   
+                <div className='grid grid-cols-3 max-w-6xl mx-auto gap-4 mb-20'>
+                    <CardEspecialidade img={Cardiologia} type='' text='' />
+                    <CardEspecialidade img={Pediatria} type='' text='' />
+                    <CardEspecialidade img={Ortopedia} type='' text='' />
                     
                 </div>
 

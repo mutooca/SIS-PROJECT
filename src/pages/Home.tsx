@@ -1,19 +1,32 @@
 import { GoArrowRight } from 'react-icons/go'
-import img from '../img/img2.jpeg'
-import img2 from '../img/img1.jpeg'
+import Pediatria from '../img/especialidadesImg/Pediatria.PNG'
+import Cardiologia from '../img/especialidadesImg/Cardiologia.PNG'
+import Ortopedia from '../img/especialidadesImg/Ortopedia.PNG'
+import marcarOnline from '../img/MarcarOnline.PNG'
+import notificacao from '../img/NtificaçaoInteligente.PNG'
+import seguranca from '../img/segurança.PNG'
+import portalMedico from '../img/PortalMedico.PNG'
+import respostasRapidas from '../img/RespostasRapidas.PNG'
+import registoClinicoDigital from '../img/registoClinicoDigital.PNG'
+import pessoaUtente from '../img/PessoaUtente.PNG'
+import img from '../img/img1.jpeg'
 import { IoTrophyOutline } from 'react-icons/io5'
 import CardOverView from '../components/CardOverview'
-import { CalendarIcon, HeartIcon, Users2Icon } from 'lucide-react'
+import { Users2Icon } from 'lucide-react'
 import Title from '../components/Title'
 import Header from '../layout/Header'
+import CardEspecialidade from '../components/CardEspecialidade'
+import CardFuncionalidade from '../components/CardFuncionalidade'
 
 export default function Home(){
+    console.log(Pediatria);
+
     return(
+
         <div className=''>
             <div className="h-16">
                     <Header/>
             </div>
-                            
 
             <div className="relative h-[80vh] max-w-screen hoverflow-hidden">
                 <div className='inset-0 h-[80vh]  bg-blue-400 absolute'>
@@ -33,7 +46,7 @@ export default function Home(){
             </div>
             <div className='bg-indigo-50 max-w-full'>
                 <div className=' flex justify-center py-10'>
-                    <div className=' max-w-7xl grid grid-cols-2 md:grid-cols-4 gap-3'>
+                    <div className=' max-w-7xl grid sm:grid-cols-2 xl:grid-cols-4 gap-4'>
                         <CardOverView colorIcon='green' title='15+' text='Anos de Experiência' icon={<IoTrophyOutline size={40}></IoTrophyOutline>} />
                         <CardOverView title='50K+' text='Utentes Registados' icon={<Users2Icon size={40}/>} />
                         <CardOverView title='200+' text='Profissionais de Saúde' icon={<IoTrophyOutline size={40}></IoTrophyOutline>} />
@@ -45,36 +58,51 @@ export default function Home(){
                 <Title title='Especialidades Médicas' descrition='Oferecemos uma ampla gama de especialidades com equipamentos de última geração.'/>
 
                 <div>
-                </div >
-                <div className='grid grid-cols-3 max-w-6xl mx-auto gap-12 mb-20'>
-                    <div className='w-96 h-full rounded-lg hover:shadow-2xl hover:scale-101 transition ease-in '>
-                        <div className='w-96 rounded-t-lg h-44 bg-gradient-to-b from-black to-white'>
-                            <img src={img2} alt="" className='w-full absolute rounded-t-lg h-44 relative' />
-                            <span className='relative text-white top-30 left-4'><HeartIcon size={40}/></span>
-                        </div>
-                        <div className='space-y-3 px-5 bg-white py-4'>
-                            <h3 className='font-bold text-2xl'>Cardiologia</h3>
-                            <p className='text-justify text-zinc-700'>Cuidados especializados para o coração com tecnologia de monitorização avançada e equipa altamente qualificada.</p>
-                            <button className='flex justify-center items-center w-full font-semibold gap-3 border-2 border-blue-500 p-2 rounded-lg hover:bg-blue-500 text-blue-500 hover:text-white'>
-                                Saber Mais
-                                <GoArrowRight size={17} />
-                            </button>
-                        </div>
-                    </div>
-                   
-                    
                 </div>
+                <div className='flex justify-center items-center'>
+                    <div className='grid sm:grid-cols-3 max-w-7xl gap-4 mb-20'>
+                        <CardEspecialidade img={Cardiologia} type='Cardiologia' text='Cuidados especializados para o coração com tecnologia de monitorização avançada e equipa altamente qualificada.' />
+                        <CardEspecialidade img={Pediatria} type='Pediatria' text='Atendimento especializado para crianças em ambiente acolhedor, com médicos experientes em saúde infantil.' />
+                        <CardEspecialidade img={Ortopedia} type='Ortopedia' text='Tratamento de lesões ósseas e musculares com tecnologia de imagiologia de última geração.' />
+                        
+                    </div>
+                </div>
+               
 
                 <Title title='Funcionalidades do Sistema' descrition='Plataforma completa para gestão de cuidados de saúde.'/>
                 
-                <div className='w-6xl mx-auto'>
-                    <div className='w-100 h-54 p-2 rounded-xl bg-white border-l-4 border-blue-500'>
-                        <span className=''><CalendarIcon size={38} className='bg-blue-500/40 rounded-xl'/></span>
-                        <h2>Marcação Online</h2>
-                        <p>Marque consultas e exames 24/7 através da plataforma, com confirmação instantânea e lembretes automáticos.</p>
+                <div className='flex items-center justify-center'>
+                    <div className='max-w-7xl grid grid-cols-3 gap-x-5 gap-y-8'>
+                        
+                       <CardFuncionalidade img={marcarOnline} title='Marcação Online' text='Marque consultas e exames 24/7 através da plataforma, com confirmação instantânea e lembretes automáticos.'/>
+                       <CardFuncionalidade img={registoClinicoDigital} title='Registo Clínico Digital' text='Acesso completo ao seu RCU com histórico médico, resultados de exames e prescrições em formato digital seguro.'/>
+                       <CardFuncionalidade img={seguranca} title='Segurança Máxima' text='Encriptação de dados de nível hospitalar, conformidade com RGPD e controlo de acesso multinível.'/>
+                       <CardFuncionalidade img={portalMedico} title='Portal Médico' text='Interface dedicada para profissionais gerirem consultas, diagnósticos e tratamentos de forma eficiente.'/>
+                       <CardFuncionalidade img={notificacao} title='Notificações Inteligentes' text='Sistema automático de lembretes por e-mail e SMS para consultas, exames e medicação.'/>
+                       <CardFuncionalidade img={respostasRapidas} title='Respostas Rápidas' text='Acesso a resultados de exames em tempo real e comunicação directa com a equipa médica.'/>
+                       
+                    
                     </div>
                 </div>
                 
+                <Title title='Acesso por Tipo de Utilizador' descrition='Sistema adaptado às necessidades específicas de cada utilizador'/>
+                
+                <div>
+                    <div>
+                        <div>
+                            <div>
+                                <img src={pessoaUtente} alt="" />
+                            </div>
+                            <div>
+                                <h3>Utentes</h3>
+                                <p>Plataforma intuitiva para gestão completa da sua saúde</p>
+                                <div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
            
             

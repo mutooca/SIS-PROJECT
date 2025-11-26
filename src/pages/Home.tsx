@@ -1,5 +1,5 @@
 import { GoArrowRight } from 'react-icons/go'
-import Pediatria from '../img/especialidadesImg/Pediatria.PNG'
+import Pediatria from '../img/especialidadesImg/Pediatria.PNG';
 import Cardiologia from '../img/especialidadesImg/Cardiologia.PNG'
 import Ortopedia from '../img/especialidadesImg/Ortopedia.PNG'
 import marcarOnline from '../img/MarcarOnline.PNG'
@@ -109,3 +109,5 @@ export default function Home(){
         </div>
     )
 }
+
+

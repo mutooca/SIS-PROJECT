@@ -25,3 +25,4 @@ export default function CardEspecialidade({img, type, text}: props){
         </div>
     )
 }
+

@@ -8,7 +8,7 @@ import type { ReactNode } from "react"
     colorIcon ?: 'green' | 'blue'
   }
 
- 
+
  export default function CardOverView({ icon, title, text}: props){
 
 

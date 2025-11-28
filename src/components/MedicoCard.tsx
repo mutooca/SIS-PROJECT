@@ -11,7 +11,7 @@ interface props{
 export default function MedicoCard({sigla, nome, especialidade, registo, esperiencia, horarioAtendimento}: props){
   return(
     <>
-        <div className="bg-white shadow rounded-2xl  min-w-[300px] min-h-[200px] p-6 border border-blue-100 flex flex-col items-center justify-center houver:cursor-pointer relative ">
+        <div className="bg-white shadow rounded-2xl  min-w-[300px] min-h-[200px] hover:shadow-2xl transition p-6 border border-blue-100 flex flex-col items-center justify-center houver:cursor-pointer relative ">
           <div className="flex justtify-bettween w-full  bg-red relative gap-4 ">
             <div className="flex justify-center w-16 h-16 cursor-pointer rounded-full bg-blue-500 p-2 text-white font-bold text-center ">
              <h3 className="flex my-auto ">{sigla}</h3> 

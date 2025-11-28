@@ -1,5 +1,4 @@
 import Header from '../layout/Header';
-import Title from '../components/Title';
 import ExamesCard from '../components/ExamesCard';
 import CardExamePrescricao from '../components/CardExamePrescricao';
 import Footer from "../layout/Footer";
@@ -16,14 +15,21 @@ export default function Exames(){
          <>
             <Header/>
 
-            <div className="  bg-indigo-50  relative p-6">
+            <div className="  bg-indigo-50  relative py-2">
 
-                <div className=" mr-20 text-left mt-[100px]">
-                    <Title title='Exames Complementares de Diagnóstico' descrition='Exames laboratoriais e de imagem com equipamento moderno e resultados precisos'/>
-                </div>
+            <div className=" flex  mt-[80px] ml-20 flex-col p-4">
+                   <h2 className="font-bold text-5xl text-zinc-800">Exames Complementares de</h2>
+                   <h2 className="font-bold text-5xl text-zinc-800 ">Diagnóstico</h2>
+                   <p className="flex text-zinc-800 my-6 text-lg">Exames laboratoriais e de imagem com equipamento moderno e resultados precisos</p>
+            
+             </div>
 
-                <button className=" text-gray-700 flex max-w-7xl rounded-xl p-2 min-h-[7px] border border-blue-300 bg-blue-100 mx-auto  text-sm mb-[5px]">Nota: Alguns exames requerem prescrição médica. Certifique-se de ter a prescrição registada no seu RCU antes de marcar.</button>
-             <div className="flex max-w-7xl bg-gray-100  min-h-[500px] items-center justify-center">
+
+            <div className="max-w-6xl flex-col  sm:flex-col lg:flex-row mx-auto my-4 ">
+                <button className=" text-gray-700 flex min-w-[400px] sm:min-w-[600px] md:min-w-[500px] xl:min-w-[1150px] rounded-xl p-2 min-h-[7px] p-4 border border-blue-300 bg-blue-100 mx-auto  text-sm mb-[5px] gap-1"><p className="font-semibold ">Nota:</p>  Alguns exames requerem prescrição médica. Certifique-se de ter a prescrição registada no seu RCU antes de marcar.</button>
+            </div>
+
+             <div className="flex max-w-7xl bg-gray-100  min-h-[500px] items-center justify-center mx-auto ">
                     <div className="mt-[30px] max-w-6xl mx-auto gap-4 mt-20 grid  sm:grid-cols-2 md:grid-cols-3">
                         <ExamesCard  img={exame01} conteudobotao='Laboratório' title='Análises Clínicas' text='Hemograma completo, bioquímica, hormônios e outros exames laboratoriais.'  resultadoExame='Resultado em: Imediato' />
                         <ExamesCard img={exame02} conteudobotao='Cardiologia' title='Electrocardiograma (ECG)' text='Exame para avaliar a actividade eléctrica do coração.' resultadoExame='Resultado em: Imediato'
@@ -39,10 +45,10 @@ export default function Exames(){
                         />
                     </div>
               </div> 
-         </div>
-          <div className="w-full">
+              <div className="w-full">
                     <Footer/>
-         </div>
+             </div>
+         </div>   
         </>
     )
    

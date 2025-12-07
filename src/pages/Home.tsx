@@ -89,7 +89,7 @@ export default function Home(){
                 
                 <div>
                     <div>
-                        <div>
+                        <div className='h-120 p-4 bg-white border-t-4 border-blue-400 rounded-xl w-'>
                             <div>
                                 <img src={pessoaUtente} alt="" />
                             </div>

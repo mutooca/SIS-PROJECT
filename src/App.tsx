@@ -5,6 +5,8 @@ import Exames from "./pages/Exames"
 import Medicos from "./pages/Medicos"
 import Entrar from "./pages/Entrar"
 import Registar from "./pages/Registar"
+import Header from "./layout/Header"
+import Footer from "./layout/Footer"
 
 
 
@@ -12,16 +14,17 @@ function App() {
 
   return (
     <div className=''>
-  
       <BrowserRouter>
+        <Header/>
         <Routes>
           <Route path="/" element={<Home />} /> 
-          <Route path="/Especialidade" element={<Especialidade />} /> 
-          <Route path="/Exames" element={<Exames />} /> 
-          <Route path="/Medicos" element={<Medicos/>} /> 
-          <Route path="/Entrar" element={<Entrar/>}/> 
-          <Route path="/Registar" element={<Registar/>}/> 
+          <Route path="/especialidade" element={<Especialidade />} /> 
+          <Route path="/exames" element={<Exames />} /> 
+          <Route path="/medicos" element={<Medicos/>} /> 
+          <Route path="/entrar" element={<Entrar/>}/> 
+          <Route path="/registar" element={<Registar/>}/> 
         </Routes>
+        <Footer/>
       </BrowserRouter>
       
     </div>

@@ -1,7 +1,6 @@
-import Header from '../layout/Header';
+
 import ExamesCard from '../components/ExamesCard';
 import CardExamePrescricao from '../components/CardExamePrescricao';
-import Footer from "../layout/Footer";
 import exame01 from '../img/exame01.png';
 import exame02 from '../img/exame02.png';
 import exame03 from '../img/exame03.png';
@@ -13,8 +12,6 @@ import exame06 from '../img/exame06.png';
 export default function Exames(){
     return(
          <>
-            <Header/>
-
             <div className="  bg-indigo-50  relative py-2">
 
             <div className=" flex  mt-[80px] ml-20 flex-col p-4">
@@ -45,9 +42,6 @@ export default function Exames(){
                         />
                     </div>
               </div> 
-              <div className="w-full">
-                    <Footer/>
-             </div>
          </div>   
         </>
     )

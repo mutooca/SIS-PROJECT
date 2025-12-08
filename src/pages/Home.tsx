@@ -9,14 +9,18 @@ import portalMedico from '../img/PortalMedico.PNG'
 import respostasRapidas from '../img/RespostasRapidas.PNG'
 import registoClinicoDigital from '../img/registoClinicoDigital.PNG'
 import pessoaUtente from '../img/PessoaUtente.PNG'
+import pessoalAdministrativo from '../img/PessoalAdministrativo.PNG'
+import pessoalClinico from '../img/PessoalClinico.PNG'
 import img from '../img/img1.jpeg'
 import { IoTrophyOutline } from 'react-icons/io5'
 import CardOverView from '../components/CardOverview'
-import { Users2Icon } from 'lucide-react'
+import { PhoneIcon, Users2Icon } from 'lucide-react'
 import Title from '../components/Title'
 import Header from '../layout/Header'
 import CardEspecialidade from '../components/CardEspecialidade'
 import CardFuncionalidade from '../components/CardFuncionalidade'
+import CardTipoUtilizador from '../components/CardTipoUtilizador';
+import { SlEnergy } from "react-icons/sl"
 
 export default function Home(){
     console.log(Pediatria);
@@ -87,24 +91,57 @@ export default function Home(){
                 
                 <Title title='Acesso por Tipo de Utilizador' descrition='Sistema adaptado às necessidades específicas de cada utilizador'/>
                 
-                <div>
-                    <div>
-                        <div className='h-120 p-4 bg-white border-t-4 border-blue-400 rounded-xl w-'>
-                            <div>
-                                <img src={pessoaUtente} alt="" />
-                            </div>
-                            <div>
-                                <h3>Utentes</h3>
-                                <p>Plataforma intuitiva para gestão completa da sua saúde</p>
-                                <div>
+                <div className='flex items-center justify-center pb-8'>
+                    <div className='max-w-6xl grid grid-cols-3 gap-8'>
+                      
+                        <CardTipoUtilizador img={pessoaUtente} type='Utentes' p1='Marcação de consultas e exames online' text='Plataforma intuitiva para gestão completa da sua saúde' p2='Acesso total ao RCU digital' p3='Gestão de dados pessoais e histórico' p4='Notificações e lembretes automáticos' textButton='Registar-se Agora' colorBorder='blue' colorButton='blue' />
+                        
+                        <CardTipoUtilizador img={pessoalClinico} type='Pessoal Clínico' p1='Dashboard completo de consultas' text='Ferramentas profissionais para gestão clínica eficiente' p2='Actualização e gestão de RCU' p3='Controlo de horários e disponibilidade' p4='Sistema de prescrição electrónica' textButton='Acesso Clínico' colorBorder='green' colorButton='green' />
 
-                                </div>
-                            </div>
-                        </div>
+                        <CardTipoUtilizador img={pessoalAdministrativo} type='Administrativo' p1='Gestão completa de utilizadores' text='Controlo total da operação hospitalar' p2='Controlo de marcações e cancelamentos' p3='Gestão de horários do pessoal' p4='Relatórios e estatísticas avançadas' textButton='Acesso Admin' colorBorder='blue' colorButton='blue' />
                     </div>
                 </div>
             </div>
            
+           <div className='max-w-full h-full py-14 bg-gradient-to-l from-green-400 to-blue-400 flex flex-col justify-center items-center'>
+                <div className='space-y-5 max-w-4xl flex flex-col justify-center '>
+                    <p className='flex justify-center'>< PhoneIcon size={60} className='text-white' /></p>
+                    <h1 className='text-white font-semibold text-5xl text-center'>Precisa de Ajuda?</h1>
+                    <p className='text-center text-white text-xl'>A nossa equipa está disponível 24/7 para responder às suas questões e auxiliar no processo de registo</p>
+                    <div className='flex gap-4 items-center justify-center'>
+                        <button className='flex justify-center items-center max-w-80 font-semibold gap-3 border-2  py-2 px-5 rounded-lg bg-green-500 text-white shadow border-none hover:bg-green-400 transition'>
+                            <PhoneIcon size={17} />
+                            Contactar Suporte
+                        </button>
+                        <button className='flex justify-center items-center max-w-80 font-semibold gap-3 border-2 border-blue-300 py-2 px-5 rounded-lg text-white bg-gradient-to-b from-blue-400 to-green-400 hover: border-blue-100 transition'>
+                            Registrar Agora
+                            <GoArrowRight size={17} />
+                        </button>
+                    </div>
+                </div>
+           </div>
+
+           <div className='max-w-full h-full py-16 bg-indigo-50 flex flex-col justify-center items-center'>
+                <div className='space-y-5 max-w-4xl flex flex-col justify-center '>
+                    <div className='flex justify-center'>
+                        <p className='flex rounded-full p-2 font-bold items-center bg-indigo-100 text-blue-500 max-w-68 gap-2 '><SlEnergy />Registo Rápido e Gratuito</p>
+                    </div>
+                    
+                    <h1 className=' font-bold text-5xl text-center'>Pronto para Começar a Sua Jornada de Saúde?</h1>
+                    <p className='text-center text-zinc-700 text-xl'>Junte-se a milhares de utentes que já confiam no Sistema de Informação de Saúde PDC.AO para gerir a sua saúde</p>
+                    <div className='flex gap-4 items-center justify-center'>
+                       
+                        <button className='flex justify-center items-center max-w-80 font-semibold gap-3 border-2 border-blue-300 py-2 px-5 rounded-lg text-white bg-gradient-to-b from-blue-400 to-green-400 hover: border-blue-100 transition'>
+                            Criar Conta Gratuíta
+                            <GoArrowRight size={17} />
+                        </button> 
+                        <button className='flex justify-center items-center max-w-80 font-semibold gap-3 border-2  py-2 px-5 rounded-lg bg-indigo-50 border-2 border-blue-500 text-blue-500 shadow hover:bg-blue-500 hover:text-white transition'>
+                            <PhoneIcon size={17} />
+                            Explorar Especialidades
+                        </button>
+                    </div>
+                </div>
+           </div>
             
         </div>
     )

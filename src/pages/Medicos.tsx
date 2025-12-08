@@ -1,14 +1,10 @@
-import Header from '../layout/Header';
+
 import TitleMedicoEspe from '../components/TitleMedicoEspe';
 import MedicoCard from '../components/MedicoCard';
-import Footer from "../layout/Footer";
 
 export default function Medicos(){
     return(
          <>
-            <div className="h-16">
-                    <Header/>
-            </div>
 
             <div className=" bg-indigo-50 relative py-3">
                 <div className="flex items-start justify-start ml-[50px] mt-[15px] p-6">
@@ -23,9 +19,6 @@ export default function Medicos(){
                         <MedicoCard  sigla="DP" nome="Dr. Pedro Alves" especialidade="Oftalmologia" registo="CRM/AO 56789" esperiencia="14 anos" horarioAtendimento="Segunda a Sexta, 8h-17h"/>
                         <MedicoCard  sigla="DS" nome="Dra. Sofia Oliveira" especialidade="Clínica Geral" registo="CRM/AO 67890" esperiencia="8 anos" horarioAtendimento="Segunda a Sexta, 7h-16h"/>
                     </div>
-                </div>
-                <div className="">
-                    <Footer/>
                 </div>
             </div>
         </>

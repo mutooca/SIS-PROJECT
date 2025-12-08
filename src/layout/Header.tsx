@@ -1,4 +1,5 @@
 import { CiHeart } from "react-icons/ci";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
@@ -9,28 +10,29 @@ export default function Header() {
           <div className="bg-blue-400 p-1 rounded-2xl flex items-center justify-center">
             <CiHeart size={30} className="text-blue-400 bg-white rounded-xl" />
           </div>
-          <h1 className="text-blue-400 font-bold text-2xl">SIS - PDC.AO</h1>
+          <Link to={'/'}><h1 className="text-blue-400 font-bold text-2xl">SIS - PDC.AO</h1></Link>
+          
         </div>
 
         <nav className="flex items-center gap-6">
           <ul className="hidden md:flex gap-6 font-semibold text-zinc-500">
-            <li><a href="/">Home</a></li>
-            <li><a href="/Especialidade">Especialidades</a></li>
-            <li><a href="/Medicos">Médicos</a></li>
-            <li><a href="/Exames">Exames</a></li>
+            <li><Link to={'/'} >Home</Link></li>
+            <li><Link to={'/especialidade'} >Especialidades</Link></li>
+            <li><Link to={'/medicos'} >Médicos</Link></li>
+            <li><Link to={'/exames'} >Exames</Link></li>
           </ul>
 
           <div className="flex gap-2 items-center">
-            <a href="/Entrar">
+            <Link to={'/entrar'}>
               <button className="py-1 px-3 border-2 border-blue-400 text-blue-400 font-semibold rounded-lg hover:bg-blue-50 transition">
               Entrar
             </button>
-            </a>
-            <a href="/Registar">
+            </Link>
+            <Link to={'registar'}>
                <button className="py-1 px-3 bg-blue-400 border-2 border-blue-400 text-white font-semibold rounded-lg hover:bg-blue-500 transition">
                Registar
                </button>
-            </a>
+            </Link>
           </div>
         </nav>
 

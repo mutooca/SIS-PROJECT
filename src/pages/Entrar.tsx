@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function Entrar(){
     return(
-        <div className="max-w-full h-full bg-indigo-50 py-8">
+        <div className="max-w-full max-h-screen bg-indigo-50 py-8">
              <div className="flex items-center justify-center gap-2 pb-10">
                 <div className="bg-blue-400 p-1 rounded-2xl flex items-center justify-center">
                     <CiHeart size={30} className="text-blue-400 bg-white rounded-xl" />

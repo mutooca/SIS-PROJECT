@@ -16,7 +16,6 @@ import { IoTrophyOutline } from 'react-icons/io5'
 import CardOverView from '../components/CardOverview'
 import { PhoneIcon, Users2Icon } from 'lucide-react'
 import Title from '../components/Title'
-import Header from '../layout/Header'
 import CardEspecialidade from '../components/CardEspecialidade'
 import CardFuncionalidade from '../components/CardFuncionalidade'
 import CardTipoUtilizador from '../components/CardTipoUtilizador';
@@ -28,10 +27,7 @@ export default function Home(){
     return(
 
         <div className=''>
-            <div className="h-16">
-                    <Header/>
-            </div>
-
+           
             <div className="relative h-[80vh] max-w-screen hoverflow-hidden">
                 <div className='inset-0 h-[80vh]  bg-blue-400 absolute'>
                     <img src={img} alt="" className='w-full h-full object-cover opacity-10' />

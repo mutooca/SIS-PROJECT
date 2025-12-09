@@ -24,12 +24,12 @@ export default function Header() {
 
           <div className="flex gap-2 items-center">
             <Link to={'/entrar'}>
-              <button className="py-1 px-3 border-2 border-blue-400 text-blue-400 font-semibold rounded-lg hover:bg-blue-50 transition">
+              <button className="hover:bg-blue-500 hover:text-white transition py-1 px-3 border-2 border-blue-400 text-blue-400 font-semibold rounded-lg hover:bg-blue-50 transition">
               Entrar
             </button>
             </Link>
             <Link to={'registar'}>
-               <button className="py-1 px-3 bg-blue-400 border-2 border-blue-400 text-white font-semibold rounded-lg hover:bg-blue-500 transition">
+               <button className="py-1 px-3 bg-blue-400 transition border-2 border-blue-400 text-white font-semibold rounded-lg hover:bg-blue-500 transition">
                Registar
                </button>
             </Link>

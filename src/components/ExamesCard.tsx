@@ -13,8 +13,8 @@ export default function ExamesCard({img, conteudobotao, title, text,  resultadoE
     return(
     <div className=" bg-white shadow hover:shadow-2xl flex flex-col justify-center items-center border border-blue-200 hover:cursor-pointer relative rounded-2xl p-6  min-w-[180px] min-h-[230px] ">
         <div className="flex justify-around w-full p-4  absolute mb-[150px]  sm:mb-[180px]">
-            <span ><img src={img} alt="icone de exameMedico " className='mr-[80px] rounded-2xl min-w-[30px]  min-h-[5px] hover:bg-blue-200 transition cursor-pointer'/></span>
-           <button className=" flex text-gray-500 rounded-2xl min-w-[20px] p-1  border border-blue-200 hover:cursor-pointer  ">{conteudobotao}</button>
+            <span ><img src={img}  alt="icone de exameMedico " className='mr-[80px] rounded-2xl min-w-[30px]  min-h-[5px] hover:bg-blue-200 transition cursor-pointer'/></span>
+           <button className=" flex text-gray-500  rounded-2xl min-w-[20px] p-1  border border-blue-200 hover:cursor-pointer  ">{conteudobotao}</button>
         </div>
 
         <div className="flex flex-col w-full relative gap-3  mt-15">

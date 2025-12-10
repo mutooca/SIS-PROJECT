@@ -9,7 +9,7 @@ export default function Footer(){
            <footer className="mt-[50px] bg-white">
 
                 {/* CONTEÚDO PRINCIPAL */}
-                <div className="w-full border-t border-gray-200 p-6 
+                <div className="max-w-full border-t border-gray-200 p-6 
                                 flex flex-col items-center md:flex-row md:justify-around gap-10 ">
 
                     {/* LOGO + DESCRIÇÃO */}

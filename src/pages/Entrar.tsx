@@ -1,8 +1,33 @@
 import { useState } from "react";
 import { CiHeart } from "react-icons/ci";
 import { Link } from "react-router-dom";
+import { z } from 'zod'
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+
+const userSchemaLogin = z.object({
+  email: z.email('Email inválido!').min(1, 'Preencha este campo!'),
+  password: z.string().min(1, 'Preencha este campo!')
+});
+
+type userLoginData = z.infer<typeof userSchemaLogin>;
 
 export default function Entrar(){
+
+    
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<userLoginData>({
+    resolver: zodResolver(userSchemaLogin)
+  });
+
+  async function handleLogin(data: userLoginData){
+        console.log(data)
+  }
+
 
     const [role, setRole] = useState<'utente' | 'admin' | 'clinico'>('utente')
      const handleSubmitRole = (value: 'utente' | 'admin' | 'clinico') => {
@@ -10,7 +35,7 @@ export default function Entrar(){
      }
 
     return(
-        <div className="max-w-full max-h-screen bg-indigo-50 py-8">
+        <div className="max-w-full h-full bg-indigo-50 py-8">
              <div className="flex items-center justify-center gap-2 pb-10">
                 <div className="bg-blue-400 p-1 rounded-2xl flex items-center justify-center">
                     <CiHeart size={30} className="text-blue-400 bg-white rounded-xl" />
@@ -31,15 +56,17 @@ export default function Entrar(){
 
                 {
                     role === 'utente' && (
-                    <form action="" className="space-y-3 w-full justify-center flex items-center flex-col px-10">
+                    <form onSubmit={handleSubmit(handleLogin)} action="" className="space-y-3 w-full justify-center flex items-center flex-col px-10">
                          <h2 className="text-lg font-bold py-4">Login Utente</h2>
                         <div className="space-y-1 flex w-full flex-col max-w-full">
                             <label htmlFor="email" className="font-semibold">Informe o e-mail</label>
-                            <input type="text" name="email" id="email" placeholder="Seu número utilizador" className="max-w-full h-12 border bg-indigo-50 rounded-lg pl-4 outline-blue-500 "/>
+                            <input type="text" {...register('email')} name="email" id="email" placeholder="Informe o seu e-mail" className="max-w-full h-12 border bg-indigo-50 rounded-lg pl-4 outline-blue-500 "/>
+                             {errors.email && <p className='text-xs text-red-600'>{errors.email.message}</p>}
                         </div>
                         <div className="space-y-1 flex flex-col  w-full">
                             <label htmlFor="password" className="font-semibold">Palavra-passe</label>
-                            <input type="password" name="password" id="password" placeholder="••••••••" className="max-w-full h-12 border bg-zinc-50 rounded-lg pl-4 bg-indigo-50 outline-blue-500 border" />
+                            <input {...register('password')} type="password" name="password" id="password" placeholder="••••••••" className="max-w-full h-12 border bg-zinc-50 rounded-lg pl-4 bg-indigo-50 outline-blue-500 border" />
+                            {errors.password && <p className='text-xs text-red-600'>{errors.password.message}</p>}
                         </div>
 
                         <button type="submit" className="bg-blue-500 text-white hover:bg-blue-400 w-full h-10 rounded-xl">Entrar</button>
@@ -54,11 +81,13 @@ export default function Entrar(){
                         <h2 className="text-lg font-bold py-4">Login Clínico</h2>
                         <div className="space-y-1 flex w-full flex-col max-w-full">
                             <label htmlFor="email" className="font-semibold">Informe o e-mail</label>
-                            <input type="text" name="email" id="email" placeholder="Seu número utilizador" className="max-w-full h-12 border bg-indigo-50 rounded-lg pl-4 outline-blue-500 "/>
+                            <input type="text" {...register('email')} name="email" id="email" placeholder="Informe o seu e-mail" className="max-w-full h-12 border bg-indigo-50 rounded-lg pl-4 outline-blue-500 "/>
+                             {errors.email && <p className='text-xs text-red-600'>{errors.email.message}</p>}
                         </div>
                         <div className="space-y-1 flex flex-col  w-full">
                             <label htmlFor="password" className="font-semibold">Palavra-passe</label>
-                            <input type="password" name="password" id="password" placeholder="••••••••" className="max-w-full h-12 border bg-zinc-50 rounded-lg pl-4 bg-indigo-50 outline-blue-500 border" />
+                            <input {...register('password')} type="password" name="password" id="password" placeholder="••••••••" className="max-w-full h-12 border bg-zinc-50 rounded-lg pl-4 bg-indigo-50 outline-blue-500 border" />
+                            {errors.password && <p className='text-xs text-red-600'>{errors.password.message}</p>}
                         </div>
 
                         <button type="submit" className="bg-blue-500 text-white hover:bg-blue-400 w-full h-10 rounded-xl">Entrar</button>
@@ -72,11 +101,13 @@ export default function Entrar(){
                          <h2 className="text-lg font-bold py-4">Login Admin</h2>
                         <div className="space-y-1 flex w-full flex-col max-w-full">
                             <label htmlFor="email" className="font-semibold">Informe o e-mail </label>
-                            <input type="text" name="email" id="email" placeholder="Seu número utilizador" className="max-w-full h-12 border bg-indigo-50 rounded-lg pl-4 outline-blue-500 "/>
+                            <input type="text" {...register('email')} name="email" id="email" placeholder="Informe o seu e-mail" className="max-w-full h-12 border bg-indigo-50 rounded-lg pl-4 outline-blue-500 "/>
+                             {errors.email && <p className='text-xs text-red-600'>{errors.email.message}</p>}
                         </div>
                         <div className="space-y-1 flex flex-col  w-full">
                             <label htmlFor="password" className="font-semibold">Palavra-passe</label>
-                            <input type="password" name="password" id="password" placeholder="••••••••" className="max-w-full h-12 border bg-zinc-50 rounded-lg pl-4 bg-indigo-50 outline-blue-500 border" />
+                            <input {...register('password')} type="password" name="password" id="password" placeholder="••••••••" className="max-w-full h-12 border bg-zinc-50 rounded-lg pl-4 bg-indigo-50 outline-blue-500 border" />
+                            {errors.password && <p className='text-xs text-red-600'>{errors.password.message}</p>}
                         </div>
 
                         <button type="submit" className="bg-blue-500 text-white hover:bg-blue-400 w-full h-10 rounded-xl">Entrar</button>

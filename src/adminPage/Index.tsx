@@ -1,13 +1,136 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { GoCalendar, GoGear, GoLog, GoPersonAdd, GoPulse } from "react-icons/go";
+import z from "zod";
+import Especialidade from "../pages/Especialidade";
 
+const createNewClinicoSchema = z.object({
+    name: z.string(),
+    numeroOrdem: z.string(),
+    senha: z.string(),
+    email: z.email(),
+    especialidade: z.string(),
+    telefone: z.string()
+})
+
+type newClinicoData = z.infer<typeof createNewClinicoSchema>
 export default function Index(){
+
+    const { register, 
+        formState: { errors},
+        handleSubmit
+    } = useForm({
+        resolver: zodResolver(createNewClinicoSchema)}
+    )
+
+    async function handleNewClinico (data: newClinicoData)  {
+        console.log(data)
+    }
+
+    const [role, setRole] = useState<'addAdmin' | 'addClinico' | 'especialidade' | 'marcacao' | 'rcu' | 'config'>('addClinico')
+    const [rolePc, setRolePc] = useState<'addNew' | 'update'>('addNew')
+
+    const handleSubmitRole = (value: 'addAdmin' | 'addClinico' | 'especialidade' | 'marcacao' | 'rcu' | 'config') => {
+        setRole(value)
+    }
+    const handleSubmitRolePc = ( value : 'addNew' | 'update') => {
+        setRolePc(value)
+    }
     return (
-        <div className="">
-            <div className="flex items-center justify-between">
+        <div className="bg-zinc-100">
+            <div className="flex items-center justify-between mx-8 py-8">
                 <div>
                     <h1 className="font-semibold text-3xl">Painel Administrativo</h1>
                     <p className="text-zinc-600">Bem-vindo, João Silva</p>
                 </div>
-                 <button className="hover:bg-blue-500 hover:text-white transition py-1 px-5 rounded-lg text-center font-semibold flex items-center gap-2" >Voltar</button>
+                 <button className="hover:bg-blue-500 hover:text-white transition py-1 px-5 rounded-lg text-center font-semibold flex items-center gap-2 border-2 border-blue-400" >Sair</button>
+            </div>
+
+            <div>
+                <div className="grid grid-cols-6 gap-2 bg-indigo-50 py-1 px-2 rounded-lg ">
+                    <button onClick = {() => handleSubmitRole('addAdmin')} className={`hover:bg-gray-50 transition py-1 rounded-lg text-center font-semibold justify-center font-semibold flex items-center gap-2 ${role === 'addAdmin' ? 'bg-gray-50' : ''}`}><GoPersonAdd />Mais Admin</button>
+                    <button onClick = {() => handleSubmitRole('addClinico')} className={`hover:bg-gray-50 transition py-1 rounded-lg text-center font-semibold justify-center font-semibold flex items-center gap-2 ${role === 'addClinico' ? 'bg-gray-50' : ''}`}><GoPersonAdd />Pessoal Clínico</button>
+                    <button onClick = {() => handleSubmitRole('especialidade')} className={`hover:bg-gray-50 transition py-1 rounded-lg text-center font-semibold justify-center font-semibold flex items-center gap-2 ${role === 'especialidade' ? 'bg-gray-50' : ''}`}><GoPulse />Especialidades</button>
+                    <button onClick = {() => handleSubmitRole('marcacao')} className={`hover:bg-gray-50 transition py-1 rounded-lg text-center font-semibold justify-center font-semibold flex items-center gap-2 ${role === 'marcacao' ? 'bg-gray-50' : ''}`}><GoCalendar />Marcações</button>
+                    <button onClick = {() => handleSubmitRole('rcu')} className={`hover:bg-gray-50 transition py-1 rounded-lg text-center font-semibold justify-center font-semibold flex items-center gap-2 ${role === 'rcu' ? 'bg-gray-50' : ''}`}><GoLog />RCU</button>
+                    <button onClick = {() => handleSubmitRole('config')} className={`hover:bg-gray-50 transition py-1 rounded-lg text-center font-semibold justify-center font-semibold flex items-center gap-2 ${role === 'config' ? 'bg-gray-50' : ''}`}><GoGear />Configurações</button>
+                </div>
+
+                <div className="mx-10 border my-4 bg-white shadow rounded-xl p-5">
+                    <div>
+                        <h2 className="font-semibold text-xl">Gestão de Pessoal Clínico</h2>
+                        <p className="text-zinc-600">Criar e actualizar registos do pessoal clínico</p>
+
+                        <div className="grid grid-cols-2 gap-2 bg-indigo-50 py-1 px-2 rounded-lg my-4">
+                            <button onClick={() => handleSubmitRolePc('addNew')} className={`hover:bg-gray-50 transition py-1 rounded-lg text-center font-semibold justify-center font-semibold flex items-center gap-2 ${rolePc === 'addNew' ? 'bg-gray-50' : ''}`}>Criar Novo</button>
+                            <button onClick={() => handleSubmitRolePc('update')} className={`hover:bg-gray-50 transition py-1 rounded-lg text-center font-semibold justify-center font-semibold flex items-center gap-2 ${rolePc === 'update' ? 'bg-gray-50' : ''}`}>Gerir Existentes</button>
+                        </div>
+
+                        <div className="space-y-3">
+                            <h3 className="font-semibold">Criar Novo Registo</h3>
+                             <div className='grid grid-cols-2 gap-4 w-full'>
+                                <div className="space-y-1 flex flex-col w-full">
+                                    <label htmlFor="name" className="font-semibold">Nome Completo</label>
+                                    <input {...register('name')} type="text" name="name" id="name" placeholder="Informe o nome" className="max-w-full h-12 border bg-zinc-50 rounded-lg pl-4 bg-indigo-50 outline-blue-500 border" />
+                                    {errors.name  && <p className='text-xs text-red-600'>{errors.name.message}</p>}
+                                </div>
+                                <div className="space-y-1 flex flex-col w-full">
+                                    <label htmlFor="numeroOrdem" className="font-semibold">Número da Ordem</label>
+                                    <input {...register('numeroOrdem')} type="text" name="numeroOrdem" id="numeroOrdem" placeholder="Informe o numero de ordem" className="max-w-full h-12 border bg-zinc-50 rounded-lg pl-4 bg-indigo-50 outline-blue-500 border" />
+                                    {errors.numeroOrdem  && <p className='text-xs text-red-600'>{errors.numeroOrdem.message}</p>}
+                                </div>
+                            </div>
+                             <div className='grid grid-cols-2 gap-4 w-full'>
+                                <div className="space-y-1 flex flex-col w-full">
+                                    <label htmlFor="name" className="font-semibold">Especialidade</label>
+                                    <input {...register('especialidade')} type="text" name="especialidade" id="especialidade" placeholder="Informe a especialidade" className="max-w-full h-12 border bg-zinc-50 rounded-lg pl-4 bg-indigo-50 outline-blue-500 border" />
+                                    {errors.especialidade  && <p className='text-xs text-red-600'>{errors.especialidade.message}</p>}
+                                </div>
+                                <div className="space-y-1 flex flex-col w-full">
+                                    <label htmlFor="telefone" className="font-semibold">Telefone</label>
+                                    <input {...register('telefone')} type="text" name="telefone" id="telefone" placeholder="+244 912 345 678" className="max-w-full h-12 border bg-zinc-50 rounded-lg pl-4 bg-indigo-50 outline-blue-500 border" />
+                                    {errors.telefone  && <p className='text-xs text-red-600'>{errors.telefone.message}</p>}
+                                </div>
+                            </div>
+                             <div className='grid grid-cols-2 gap-4 w-full'>
+                                <div className="space-y-1 flex flex-col w-full">
+                                    <label htmlFor="email" className="font-semibold">E-mail</label>
+                                    <input {...register('especialidade')} type="email" name="email" id="email" placeholder="pessoalclinico@mail.com" className="max-w-full h-12 border bg-zinc-50 rounded-lg pl-4 bg-indigo-50 outline-blue-500 border" />
+                                    {errors.email  && <p className='text-xs text-red-600'>{errors.email.message}</p>}
+                                </div>
+                                <div className="space-y-1 flex flex-col w-full">
+                                    <label htmlFor="senha" className="font-semibold">Senha Inicial</label>
+                                    <input {...register('senha')} type="password" name="senha" id="senha" placeholder="••••••••" className="max-w-full h-12 border bg-zinc-50 rounded-lg pl-4 bg-indigo-50 outline-blue-500 border" />
+                                    {errors.senha  && <p className='text-xs text-red-600'>{errors.senha.message}</p>}
+                                </div>
+                            </div>
+
+                             <h3 className="font-semibold">Definir Horário</h3>
+                             <div className='grid grid-cols-2 gap-4 w-full'>
+                                <div className="space-y-1 flex flex-col w-full">
+                                    <label htmlFor="name" className="font-semibold">Horário de Início</label>
+                                    <input {...register('name')} type="time" name="name" id="name" placeholder="--:--" className="max-w-full h-12 border bg-zinc-50 rounded-lg pl-4 bg-indigo-50 outline-blue-500 border" />
+                                    {errors.name  && <p className='text-xs text-red-600'>{errors.name.message}</p>}
+                                </div>
+                                <div className="space-y-1 flex flex-col w-full">
+                                    <label htmlFor="numeroOrdem" className="font-semibold">Horario do fim</label>
+                                    <input {...register('numeroOrdem')} type="time" name="numeroOrdem" id="numeroOrdem" placeholder="--:--" className="max-w-full h-12 border bg-zinc-50 rounded-lg pl-4 bg-indigo-50 outline-blue-500 border" />
+                                    {errors.numeroOrdem  && <p className='text-xs text-red-600'>{errors.numeroOrdem.message}</p>}
+                                </div>
+                               
+                            </div> 
+                            <div className="space-y-1 flex flex-col w-full">
+                                <label htmlFor="numeroOrdem" className="font-semibold">Dias de Atendimento</label>
+                                <input {...register('numeroOrdem')} type="text" name="numeroOrdem" id="numeroOrdem" placeholder="Ex: Segunda à Sexta" className="max-w-full h-12 border bg-zinc-50 rounded-lg pl-4 bg-indigo-50 outline-blue-500 border" />
+                                {errors.numeroOrdem  && <p className='text-xs text-red-600'>{errors.numeroOrdem.message}</p>}
+                            </div>
+                            <button type="submit" className="bg-blue-500 text-white mt-8 hover:bg-blue-400 w-full h-10 rounded-xl">Criar Registo Completo</button>
+                            
+                        </div>
+                    </div>
+                </div>
+               
             </div>
         </div>
     )

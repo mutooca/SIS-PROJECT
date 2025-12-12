@@ -46,8 +46,10 @@ export default function Registar(){
     return(
          <div className="max-w-full max-h-full bg-indigo-50 py-8">
             <div className='flex items-center mb-8 justify-between max-w-2xl mx-auto'>
-                <button className="hover:bg-blue-500 hover:text-white transition py-1 px-5 rounded-lg text-center font-semibold flex items-center gap-2" >
+                <Link to={'/'}>
+                    <button className="hover:bg-blue-500 hover:text-white transition py-1 px-5 rounded-lg text-center font-semibold flex items-center gap-2" >
                     <GoArrowLeft />Voltar</button>
+                </Link>
                 
                 <div className="flex items-center justify-center gap-2">
                     <div className="bg-blue-400 p-1 rounded-2xl flex items-center justify-center">

@@ -53,7 +53,6 @@ export default function Entrar(){
                         <button onClick={() => handleSubmitRole('clinico')} className={`hover:bg-gray-50 transition py-1 rounded-lg text-center font-semibold ${ role === 'clinico' ? 'bg-gray-50': ''}`} >Clinico</button>
                     </ul>
                 </div>
-
                 {
                     role === 'utente' && (
                     <form onSubmit={handleSubmit(handleLogin)} action="" className="space-y-3 w-full justify-center flex items-center flex-col px-10">

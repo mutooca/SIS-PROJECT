@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useState, type ReactElement } from "react";
 import { useForm } from "react-hook-form";
 import { GoCalendar, GoGear, GoLog, GoPersonAdd, GoPulse } from "react-icons/go";
 import z from "zod";
@@ -22,9 +22,15 @@ const createNewEspecialidadeSchema = z.object({
     telefone: z.string()
 })
 
+interface props{
+    to: string
+    name: string
+    icon: ReactElement
+}
 type newEspecialidadeData = z.infer<typeof createNewEspecialidadeSchema>
 type newClinicoData = z.infer<typeof createNewClinicoSchema>
 export default function Index(){
+
 
     const { register, 
         formState: { errors},
@@ -50,6 +56,8 @@ export default function Index(){
     const handleSubmitRoleMarcacao = ( value : 'consulta' | 'exame') => {
         setRoleMarcacao(value)
     }
+
+    
     return (
         <div className="bg-zinc-100">
             <div className="flex items-center justify-between mx-8 py-8">
@@ -72,7 +80,58 @@ export default function Index(){
 
                 <div className="mx-10 border my-4 bg-white shadow rounded-xl p-5">
                     <div>
-                     
+
+                    {
+                        role === 'addAdmin' && (
+                        <div>
+                            <h2 className="font-semibold text-2xl">Gestão de Administradores</h2>
+                            <p className="text-zinc-600 mb-6">Adicionar e gerir administradores do sistema</p>
+
+                            <div className="space-y-4">
+                                <div className="grid grid-cols-2 gap-4">
+                                <div className="space-y-1">
+                                    <label className="font-semibold">Nome Completo *</label>
+                                    <input
+                                    type="text"
+                                    placeholder="Nome do administrador"
+                                    className="w-full h-12 border bg-indigo-50 rounded-lg px-4 outline-blue-500"
+                                    />
+                                </div>
+                                <div className="space-y-1">
+                                    <label className="font-semibold">E-mail *</label>
+                                    <input
+                                    type="email"
+                                    placeholder="email@exemplo.com"
+                                    className="w-full h-12 border bg-indigo-50 rounded-lg px-4 outline-blue-500"
+                                    />
+                                </div>
+                                </div>
+
+                                <div className="grid grid-cols-2 gap-4">
+                                <div className="space-y-1">
+                                    <label className="font-semibold">Telefone</label>
+                                    <input
+                                    type="text"
+                                    placeholder="+244 923 456 789"
+                                    className="w-full h-12 border bg-indigo-50 rounded-lg px-4 outline-blue-500"
+                                    />
+                                </div>
+                                <div className="space-y-1">
+                                    <label className="font-semibold">Nível de Acesso</label>
+                                    <select className="w-full h-12 border bg-indigo-50 rounded-lg px-4 outline-blue-500">
+                                    <option value="full">Acesso Total</option>
+                                    <option value="limited">Acesso Limitado</option>
+                                    </select>
+                                </div>
+                                </div>
+
+                                <button className="bg-blue-500 text-white hover:bg-blue-600 w-full h-12 rounded-xl font-semibold transition">
+                                Adicionar Administrador
+                                </button>
+                            </div>
+                            </div>
+                        )
+                    }                     
 
                     {
                         role === 'addClinico' && (

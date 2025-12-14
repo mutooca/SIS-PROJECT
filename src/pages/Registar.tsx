@@ -32,6 +32,7 @@ type userRegistoData = z.infer<typeof userRegistoSchema>
 async function handleUserRegisto(data: userRegistoData) {
 
     console.log(data)
+    
 }
 
 
@@ -139,7 +140,7 @@ export default function Registar(){
                         </div>
                     </div>
 
-                    <button type="submit" className="bg-blue-500 text-white mt-8 hover:bg-blue-400 w-full h-10 rounded-xl">Criar Conta</button>
+                     <button type="submit" className=" bg-blue-500 text-white mt-8 hover:bg-blue-400 w-full h-10 rounded-xl">Criar Conta</button>
                 </form>
 
                 <div>

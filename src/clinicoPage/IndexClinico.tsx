@@ -19,8 +19,9 @@ export default function IndexClinico(){
                     </div>
             
                         <div className=" max-w-full flex justify-center bg-indigo-50">
-                            <nav className="grid max-w-7xl grid-cols-4 gap-4 py-1 px-2 rounded-lg ">
+                            <nav className="grid max-w-full grid-cols-5 gap-4 py-1 px-2 rounded-lg ">
                                 <ButtonAdmin icon={<GoRepoLocked />} theme="Consultas" to="consulta" />
+                                <ButtonAdmin icon={<GoPeople />} theme="Exames" to="exame" />
                                 <ButtonAdmin icon={<GoPeople />} theme="Pacientes" to="paciente" />
                                 <ButtonAdmin icon={<SlCalender />} theme="Horários" to="horario" />
                                 <ButtonAdmin icon={<GoPerson />} theme="Meu Perfil" to="perfilclinico" />

@@ -1,7 +1,7 @@
 
 
 interface props{
-    title: string
+    title?: string
     p: string
 }
 export default function TitleGestao({title, p}: props){

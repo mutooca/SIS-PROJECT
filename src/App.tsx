@@ -21,6 +21,7 @@ import Consulta from "./clinicoPage/Consulta"
 import Horario from "./clinicoPage/Horario"
 import Paciente from "./clinicoPage/Paciente"
 import PerfilClinico from "./clinicoPage/PerfilClinico"
+import Exame from "./clinicoPage/Exame"
 
 function App() {
   const location = useLocation()
@@ -49,6 +50,7 @@ function App() {
         </Route>
 
         <Route path="/clinico" element={<IndexClinico />}>
+            <Route path="exame" element={<Exame />} />
             <Route path="consulta" element={<Consulta />} />
             <Route path="horario" element={<Horario />} />
             <Route path="paciente" element={<Paciente />} />

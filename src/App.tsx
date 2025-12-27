@@ -8,10 +8,11 @@ import Registar from "./pages/Registar"
 import Header from "./layout/Header"
 import Footer from "./layout/Footer"
 import Index from "./adminPage"
+import Utente from "./pages/Utente"
 function App() {
     
   const location = useLocation()
-  const noHeaderFooterRouter = ['/entrar', '/registar']
+  const noHeaderFooterRouter = ['/entrar', '/registar', 'utente']
   const showHeaderFooterRouters = (!noHeaderFooterRouter.includes(location.pathname))
 
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/entrar" element={<Entrar/>}/> 
           <Route path="/admin" element={<Index/>}/> 
           <Route path="/registar" element={<Registar/>}/> 
+           <Route path="/utente" element={<Utente/>}/> 
         </Routes>
         {showHeaderFooterRouters && <Footer/>}
 

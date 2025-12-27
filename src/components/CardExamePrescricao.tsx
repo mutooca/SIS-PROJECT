@@ -12,8 +12,8 @@ interface props{
 export default function CardExamePrescricao({ img, conteudobotao, title, text,  resultadoExame,  botaoPrescricao}: props){
     return(
     <div className=" bg-white shadow hover:shadow-2xl flex flex-col justify-center items-center border border-blue-200 hover:cursor-pointer relative rounded-2xl p-6  min-w-[180px] min-h-[230px] ">
-        <div className="flex justify-around w-full p-4 mb-[150px]  absolute  sm:mb-[180px] ">
-            <span ><img src={img}  alt="icone de exameMedico " className='mr-[80px] rounded-2xl min-w-[30px]  min-h-[5px] hover:bg-blue-200 transition cursor-pointer ' /></span>
+        <div className="flex items-center justify-around space-x-40 top-0 ">
+            <span ><img src={img}  alt="icone de exameMedico " className='rounded-2xl min-w-[30px]  min-h-[5px] hover:bg-blue-200 transition cursor-pointer ml-2' /></span>
            <button className=" flex text-gray-500   rounded-2xl min-w-[20px] p-1  border border-blue-200 hover:cursor-pointer hover:bg-green-100 transition ">{conteudobotao}</button>
         </div>
 

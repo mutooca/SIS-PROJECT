@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from "react-router-dom"
+import { Routes, Route, useLocation, Navigate } from "react-router-dom"
 
 import Home from "./pages/Home"
 import Especialidade from "./pages/Especialidade"
@@ -52,6 +52,8 @@ function App() {
 
         {/* ADMIN */}
         <Route path="/admin" element={<Index />}>
+
+          <Route index element={< Navigate to={'clinico'} replace />} />
           <Route path="addadmin" element={<AddAdmin />} />
           <Route path="clinico" element={<AddClinico />} />
           <Route path="especialidade" element={<EspecialidadeAdmin />} />
@@ -62,6 +64,7 @@ function App() {
 
         {/* CLÍNICO */}
         <Route path="/clinico" element={<IndexClinico />}>
+          <Route index element={<Navigate to={"consulta"} replace />} />
           <Route path="exame" element={<Exame />} />
           <Route path="consulta" element={<Consulta />} />
           <Route path="horario" element={<Horario />} />

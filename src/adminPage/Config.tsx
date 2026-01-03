@@ -54,7 +54,7 @@ export default function Config(){
                                 </div>
                             </div>
 
-                            <div className="flex md:flex-col items-center justify-center gap-2 ">
+                            <div className="flex items-center justify-center gap-2 ">
                                 <div>
                                     <select name="" id="" className="border rounded-lg p-2 outline-none bg-zinc-100" >
                                         <option value="">Em progresso</option>
@@ -69,7 +69,7 @@ export default function Config(){
                     </div>
                 </div>
 
-                <div className="space-y-4 border-b my-4">
+                <div className="space-y-4 border-b my-4 pb-6">
                     
                     <h3 className="font-semibold text-lg my-4">Enviar Notificações por Email (Gmail)</h3>
                      <div>
@@ -102,6 +102,15 @@ export default function Config(){
                             <div className="">
                                 <h2 className="font-semibold text-lg">Resultados Disponíveis</h2>
                                 <p>Notificar quando resultados estiverem prontos</p>
+                            </div>
+                                <button className="hover:bg-blue-500 transition py-1 px-5 rounded-lg text-center font-semibold flex items-center gap-2 border-2 border-blue-400" >Abrir Gmail</button>
+                        </div>
+                    </div>
+                    <div className="space-y-3 rounded-xl shadow py-4 border border-yellow-500 px-4 bg-yellow-50">
+                        <div className="flex items-center justify-between">
+                            <div className="">
+                                <h2 className="font-semibold text-lg">Consulta Reagendada</h2>
+                                <p>Notificar utente que a consulta foi reagendada</p>
                             </div>
                                 <button className="hover:bg-blue-500 transition py-1 px-5 rounded-lg text-center font-semibold flex items-center gap-2 border-2 border-blue-400" >Abrir Gmail</button>
                         </div>

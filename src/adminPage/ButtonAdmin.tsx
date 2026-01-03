@@ -1,5 +1,5 @@
 import {type ReactElement } from "react"
-import { Link, useLocation } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 
 interface props {
     icon: ReactElement
@@ -10,12 +10,16 @@ interface props {
 
 export default function ButtonAdmin({icon, theme, to}: props){
 
-     const location = useLocation()
-    const isActive = location.pathname === to
 
     return(
-        <Link to={to}>
-             <button className={`max-w-44 hover:bg-gray-50 transition py-1 px-4 rounded-lg text-center font-semibold justify-center font-semibold flex items-center gap-2 ${isActive ? 'bg-gray-50' : ''}`}>{icon}{theme}</button>
-        </Link>
+       <NavLink
+      to={to}
+      end
+      className={({ isActive }) =>
+        `py-1 px-5 rounded-lg flex justify-center items-center gap-2 font-semibold transition
+        ${isActive ? "bg-white  shadow" : "hover:bg-gray-50"}`
+      }
+    >{icon}{theme}
+    </NavLink>
     )
 }

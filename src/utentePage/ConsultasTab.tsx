@@ -66,7 +66,7 @@ export default function ConsultasTab() {
                                         <div className="flex flex-col ">
                                             <label htmlFor="especialidade" className="">Especialidade</label>
                                              <select  {...register('especialidade')} name="especialidade" id="especialidade" className="h-12 border max-w-full rounded-lg bg-indigo-50 outline-blue-500">
-                                                <option value="">Celeciona a especialidade...</option>
+                                                <option value="">Seleccione a especialidade...</option>
                                                 
                                                 <option value="Cardiologia">Cardiologia</option>
                                                 <option value="Neurologia">Neurologia</option>

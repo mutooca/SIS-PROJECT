@@ -48,7 +48,7 @@ export default function CardTipoUtilizador({
     colorButton = 'blue'
 }: props){
     return (
-    <div className='border rounded-xl shadow hover:shadow-xl'>
+    <div className='border rounded-xl shadow hover:shadow-xl mx-4 transition h-full'>
         <div className={twMerge(clsx(card({colorBorder})) ,'h-full flex flex-col max-w-112 p-4 bg-white border-t-4 rounded-xl')}>
             <div className='flex justify-center py-4'>
                 <img src={img} alt="" />

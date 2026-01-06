@@ -51,7 +51,6 @@ export default function Exame(){
                     <div className="flex items-center justify-between border-b py-2">
                         <div>
                             <h2 className="font-semibold text-lg">Maria Santos</h2>
-
                             <div className="text-zinc-700">
                                 <p>11:00 - Análises Clínicas</p>
                                 <p>maria.santos@gmail.com</p>

@@ -35,7 +35,7 @@ export default function Entrar(){
      }
 
     return(
-        <div className="max-w-full h-full bg-indigo-50 py-8">
+        <div className="max-w-full h-full bg-indigo-50 p-8">
             <div className="flex items-center justify-center gap-2 pb-10">
                 <div className="bg-blue-400 p-1 rounded-2xl flex items-center justify-center">
                     <CiHeart size={30} className="text-blue-400 bg-white rounded-xl" />
@@ -68,7 +68,7 @@ export default function Entrar(){
                             {errors.password && <p className='text-xs text-red-600'>{errors.password.message}</p>}
                         </div>
 
-                     <Link to={'/utente'}>  <button type="submit" className="bg-blue-500 text-white hover:bg-blue-400 w-full h-10 rounded-xl">Entrar</button></Link>
+                      <button type="submit" className="bg-blue-500 text-white hover:bg-blue-400 w-full h-10 rounded-xl">Entrar</button>
                     </form>
 
                     )
@@ -109,7 +109,7 @@ export default function Entrar(){
                             {errors.password && <p className='text-xs text-red-600'>{errors.password.message}</p>}
                         </div>
 
-                       <Link to={'/admin'}>  <button type="submit" className="bg-blue-500 text-white hover:bg-blue-400 w-full h-10 rounded-xl">Entrar</button></Link>
+                        <button type="submit" className="bg-blue-500 text-white hover:bg-blue-400 w-full h-10 rounded-xl">Entrar</button>
                     </form>
 
                     )

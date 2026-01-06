@@ -16,8 +16,8 @@ export default function ButtonAdmin({icon, theme, to}: props){
       to={to}
       end
       className={({ isActive }) =>
-        `py-1 px-5 rounded-lg flex justify-center items-center gap-2 font-semibold transition
-        ${isActive ? "bg-white  shadow" : "hover:bg-gray-50"}`
+        `py-1 px-5 rounded-lg max-w-full flex justify-center mx-2 items-center gap-2 font-normal md:font-semibold transition
+        ${isActive ? "bg-white shadow" : "hover:bg-gray-50"}`
       }
     >{icon}{theme}
     </NavLink>

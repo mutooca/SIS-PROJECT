@@ -13,8 +13,8 @@ export default function CardExamePrescricao({ img, conteudobotao, title, text,  
     return(
     <div className=" bg-white shadow hover:shadow-2xl flex flex-col justify-center items-center border border-blue-200 hover:cursor-pointer relative rounded-2xl p-6  min-w-[180px] min-h-[230px] ">
         <div className="flex items-center justify-around space-x-40 top-0 ">
-            <span ><img src={img}  alt="icone de exameMedico " className='rounded-2xl min-w-[30px]  min-h-[5px] hover:bg-blue-200 transition cursor-pointer ml-2' /></span>
-           <button className=" flex text-gray-500   rounded-2xl min-w-[20px] p-1  border border-blue-200 hover:cursor-pointer hover:bg-green-100 transition ">{conteudobotao}</button>
+            <span ><img src={img} alt="icone de exameMedico " className='rounded-2xl min-w-[30px] min-h-[5px] hover:bg-blue-200 transition cursor-pointer ml-2' /></span>
+           <button className=" flex text-gray-500 rounded-2xl min-w-[20px] p-1 border border-blue-200 hover:cursor-pointer hover:bg-green-100 transition ">{conteudobotao}</button>
         </div>
 
         <div className="flex flex-col w-full relative gap-3  mt-15">
@@ -25,7 +25,7 @@ export default function CardExamePrescricao({ img, conteudobotao, title, text,  
                 <img src={exameIconPequeno} alt="" className='min-w-[5px] p-2 rounded-2xl '/>
                 <p className="text-gray-500 mt-1 mr-[10px]">{resultadoExame}</p>
            </div>
-            <button className="flex flex-col rounded-xl bg-red-100 text-red-400 hover:bg-green-300 transition w-[200px] ml-2">{botaoPrescricao}</button>
+            <button className="flex flex-col rounded-xl bg-red-100 text-red-400 font-semibold hover:bg-green-300 transition w-[208px] px-2 ml-2">{botaoPrescricao}</button>
         </div>
 
     </div>

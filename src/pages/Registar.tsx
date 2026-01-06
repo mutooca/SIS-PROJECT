@@ -30,11 +30,8 @@ const userRegistoSchema = z.object({
 type userRegistoData = z.infer<typeof userRegistoSchema>
 
 async function handleUserRegisto(data: userRegistoData) {
-
     console.log(data)
-    
 }
-
 
 export default function Registar(){
     const {
@@ -45,7 +42,7 @@ export default function Registar(){
         resolver: zodResolver(userRegistoSchema)
     })
     return(
-         <div className="max-w-full max-h-full bg-indigo-50 py-8">
+         <div className="max-w-full max-h-full bg-indigo-50 p-8">
             <div className='flex items-center mb-8 justify-between max-w-2xl mx-auto'>
                 <Link to={'/'}>
                     <button className="hover:bg-blue-500 hover:text-white transition py-1 px-5 rounded-lg text-center font-semibold flex items-center gap-2" >
@@ -74,7 +71,7 @@ export default function Registar(){
                         <input {...register('email')} type="text" name="email" id="email" placeholder="Seu e-mail" className="max-w-full h-12 border bg-indigo-50 rounded-lg pl-4 outline-blue-500 "/>
                         {errors.email  && <p className='text-xs text-red-600'>{errors.email.message}</p>}
                     </div>
-                    <div className='grid grid-cols-2 gap-4 w-full'>
+                    <div className='grid sm:grid-cols-2 gap-4 w-full'>
                         <div className="space-y-1 flex flex-col w-full">
                             <label htmlFor="password" className="font-semibold">Palavra-passe *</label>
                             <input {...register('password')} type="password" name="password" id="password" placeholder="••••••••" className="max-w-full h-12 border bg-zinc-50 rounded-lg pl-4 bg-indigo-50 outline-blue-500 border" />
@@ -93,7 +90,7 @@ export default function Registar(){
                         <input {...register('nome')} type="text" name="nome" id="nome" placeholder="Seu nome completo" className="max-w-full h-12 border bg-indigo-50 rounded-lg pl-4 outline-blue-500 "/>
                         {errors.nome  && <p className='text-xs text-red-600'>{errors.nome.message}</p>}
                     </div>
-                    <div className='grid grid-cols-2 gap-4 w-full'>
+                    <div className='grid sm:grid-cols-2 gap-4 w-full'>
                         <div className="space-y-1 flex flex-col w-full">
                             <label htmlFor="date" className="font-semibold">Data de Nascimento *</label>
                             <input {...register('data')} type="date" name="data" id="data" placeholder="dd/mm/aaaa" className="max-w-full h-12 border bg-zinc-50 rounded-lg pl-4 bg-indigo-50 outline-blue-500 border" />
@@ -112,7 +109,7 @@ export default function Registar(){
                         <input {...register('morada')} type="text" name="morada" id="morada" placeholder="Morada" className="max-w-full h-12 border bg-indigo-50 rounded-lg pl-4 outline-blue-500 "/>
                         {errors.morada  && <p className='text-xs text-red-600'>{errors.morada.message}</p>}
                     </div>
-                    <div className='grid grid-cols-2 gap-4 w-full'>
+                    <div className='grid sm:grid-cols-2 gap-4 w-full'>
                         <div className="space-y-1 flex flex-col w-full">
                             <label htmlFor="localidade" className="font-semibold">Localidade *</label>
                             <input {...register('localidade')} type="text" name="localidade" id="localidade" placeholder="Cidade" className="max-w-full h-12 border bg-zinc-50 rounded-lg pl-4 bg-indigo-50 outline-blue-500 border" />
@@ -127,7 +124,7 @@ export default function Registar(){
                     <div className="space-y-1 flex w-full flex-col max-w-full">
                         <h2 className='font-semibold pb-2 border-b mb-4 text-xl'>Informação Financeira</h2>
                     </div>
-                    <div className='grid grid-cols-2 gap-4 w-full'>
+                    <div className='grid sm:grid-cols-2 gap-4 w-full'>
                         <div className="space-y-1 flex flex-col w-full">
                             <label htmlFor="entidadeFinanceira" className="font-semibold">Entidade Financeira Responsável *</label>
                             <input {...register('entidadeFinanceira')} type="text" name="entidadeFinanceira" id="entidadeFinanceira" placeholder="Seguradora ABC" className="max-w-full h-12 border bg-zinc-50 rounded-lg pl-4 bg-indigo-50 outline-blue-500 border" />
@@ -139,7 +136,6 @@ export default function Registar(){
                             {errors.numeroEntidade  && <p className='text-xs text-red-600'>{errors.numeroEntidade.message}</p>}
                         </div>
                     </div>
-
                      <button type="submit" className=" bg-blue-500 text-white mt-8 hover:bg-blue-400 w-full h-10 rounded-xl">Criar Conta</button>
                 </form>
 

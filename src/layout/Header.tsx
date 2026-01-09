@@ -48,8 +48,8 @@ export default function Header() {
       </div>
        {
           openMenu === true && (
-            <div className="fixed bg-black w-full bg-opacity-50 top-0 right-0">
-              <div className="bg-white h-screen right-0 w-64 shadow-lg justify-between p-6 flex ">
+            <div className="fixed bg-black w-full bg-opacity-50 top-0 right-0 ">
+              <div className="bg-white h-screen w-64 shadow-lg justify-between p-6 flex ">
                   <nav>
                     <ul className="flex-col font-semibold text-zinc-500 space-y-3 my-8">
                       <li><Link to={'/'} >Home</Link></li>

@@ -12,7 +12,7 @@ export default function Paciente(){
         }
     return (
         <div>
-            <TitleGestao title="Gestão de RCU" p="Consulte e atualize registos clínicos (dados não pessoais)"/>
+            <TitleGestao title="Gestão de RCU" p="Consulte e actualize registos clínicos (dados não pessoais)"/>
 
             <div>
             <form action="">

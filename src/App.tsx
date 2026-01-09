@@ -1,4 +1,5 @@
 import { Routes, Route, useLocation, Navigate } from "react-router-dom"
+import { Toaster } from 'react-hot-toast'
 
 import Home from "./pages/Home"
 import Especialidade from "./pages/Especialidade"
@@ -35,6 +36,18 @@ function App() {
 
   return (
     <div>
+      <div>
+        <Toaster
+        position="top-right"
+        toastOptions={{
+          duration: 4000,
+          style: {
+            borderRadius: '8px',
+            fontSize: '14px',
+          },
+        }}
+      />
+      </div>
       {showHeaderFooterRouters && (
         <div className="h-20">
           <Header />

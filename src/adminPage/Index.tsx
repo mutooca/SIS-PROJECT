@@ -18,7 +18,7 @@ export default function Index(){
             </div>
 
             <div className=" max-w-full flex justify-center bg-indigo-50">
-                <nav className="grid max-w-full grid-cols-6 gap-4 py-1 px-2 rounded-lg ">
+                <nav className="grid max-w-full grid-cols-3 md:grid-cols-6 gap-4 py-1 px-2 rounded-lg ">
                     <ButtonAdmin icon={<GoPersonAdd />} theme="Mais Admin" to="addadmin" />
                     <ButtonAdmin icon={<GoPersonAdd />} theme="Pessoal Clínico" to="clinico" />
                     <ButtonAdmin icon={<GoPulse />} theme="Especialidades" to="especialidade" />

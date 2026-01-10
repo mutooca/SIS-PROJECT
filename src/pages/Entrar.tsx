@@ -68,7 +68,7 @@ export default function Entrar(){
                             {errors.password && <p className='text-xs text-red-600'>{errors.password.message}</p>}
                         </div>
 
-                     <Link to={'/utente'}>  <button type="submit" className="bg-blue-500 text-white hover:bg-blue-400 w-full h-10 rounded-xl">Entrar</button></Link>
+                     <button type="submit" className="bg-blue-500 text-white hover:bg-blue-400 w-full h-10 rounded-xl">Entrar</button>
                     </form>
 
                     )
@@ -89,7 +89,7 @@ export default function Entrar(){
                             {errors.password && <p className='text-xs text-red-600'>{errors.password.message}</p>}
                         </div>
 
-                        <button type="submit" className="bg-blue-500 text-white hover:bg-blue-400 w-full h-10 rounded-xl">Entrar</button>
+                     <button type="submit" className="bg-blue-500 text-white hover:bg-blue-400 w-full h-10 rounded-xl">Entrar</button>
                     </form>
 
                     )
@@ -109,7 +109,7 @@ export default function Entrar(){
                             {errors.password && <p className='text-xs text-red-600'>{errors.password.message}</p>}
                         </div>
 
-                       <Link to={'/admin'}>  <button type="submit" className="bg-blue-500 text-white hover:bg-blue-400 w-full h-10 rounded-xl">Entrar</button></Link>
+                        <button type="submit" className="bg-blue-500 text-white hover:bg-blue-400 w-full h-10 rounded-xl">Entrar</button>
                     </form>
 
                     )

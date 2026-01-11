@@ -74,7 +74,9 @@ export default function Entrar(){
 
                     )
                 
-                    role === 'clinico' && (
+                }
+                {
+                role === 'clinico' && (
                     <form action="" className="space-y-3 w-full justify-center flex items-center flex-col px-10">
                         <h2 className="text-lg font-bold py-4">Login Clínico</h2>
                         <div className="space-y-1 flex w-full flex-col max-w-full">
@@ -92,7 +94,8 @@ export default function Entrar(){
                     </form>
 
                     )
-                }
+                }  
+                
                 {
                     role === 'admin' && (
                     <form action="" className="space-y-3 w-full justify-center flex items-center flex-col px-10">
@@ -110,7 +113,6 @@ export default function Entrar(){
 
                         <button type="submit" className="bg-blue-500 text-white hover:bg-blue-400 w-full h-10 rounded-xl">Entrar</button>
                     </form>
-
                     )
                 }
                

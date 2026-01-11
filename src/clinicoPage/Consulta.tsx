@@ -101,7 +101,7 @@ export default function Consulta(){
                 
                     {
                         consultaSelecionada && (
-                            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center py-4 justify-center z-50">
+                            <div className="fixed inset-0 bg-black backdrop-blur-sm bg-opacity-50 flex items-center py-4 justify-center z-50">
                                 <div className="bg-gray-50 rounded-lg p-6 w-full max-w-4xl max-h-full mx-4">
                                     <form action="">
                                         <div className="flex items.center justify-between mb-4">
@@ -159,7 +159,7 @@ export default function Consulta(){
 
                     {
                         showModalTerapeutica && (
-                            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center py-4 justify-center z-50">
+                            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center backdrop-blur-sm py-4 justify-center z-50">
                                 <div className="bg-gray-50 rounded-lg p-6 w-full max-w-4xl max-h-full mx-4">
                                     <form action="">
                                         <div className="flex items.center justify-between mb-4">

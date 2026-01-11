@@ -27,6 +27,13 @@ import Paciente from "./clinicoPage/Paciente"
 import PerfilClinico from "./clinicoPage/PerfilClinico"
 import Exame from "./clinicoPage/Exame"
 
+// Utente
+import Utente from "./pages/Utente";
+import ConsultasTab from "./utentePage/ConsultasTab";
+import ExamesTab from "./utentePage/ExamesTab";
+import PerfilTab from "./utentePage/PerfilTab";
+import RcuTab from "./utentePage/RcuTab";
+
 function App() {
   const location = useLocation()
 
@@ -84,7 +91,17 @@ function App() {
           <Route path="paciente" element={<Paciente />} />
           <Route path="perfilclinico" element={<PerfilClinico />} />
         </Route>
+
+            {/* UTENTE */}
+         <Route path="/utente" element={<Utente />}>
+          <Route path="consultasTab" element={<ConsultasTab />} />
+          <Route path="examesTab" element={<ExamesTab />} />
+          <Route path="perfilTab" element={<PerfilTab />} />
+          <Route path="rcuTab" element={<RcuTab />} />
+        </Route>
       </Routes>
+
+      
 
       {showHeaderFooterRouters && <Footer />}
     </div>

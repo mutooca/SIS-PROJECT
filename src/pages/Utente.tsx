@@ -27,20 +27,12 @@ export default function Utente(){
                 <button onClick = {() => handleSubmitRole('Meu RCU')} className={`hover:bg-gray-50 transition py-1 rounded-lg text-center font-semibold justify-center font-semibold flex items-center gap-2 ${role === 'Meu RCU' ? 'bg-gray-50' : ''}`}>Meu RCU</button>
                 <button onClick = {() => handleSubmitRole('Perfil')} className={`hover:bg-gray-50 transition py-1 rounded-lg text-center font-semibold justify-center font-semibold flex items-center gap-2 ${role === 'Perfil' ? 'bg-gray-50' : ''}`}>Perfil</button>  
             </div>
-           <div className="mx-10 border my-4 bg-white shadow rounded-xl p-5 mb-4">
-                {
-                   role== 'Consultas' && <ConsultasTab />
-                
-                }
-                {
-                  role == 'Exames' && <ExamesTab />
-                }
-                {
-                  role == 'Meu RCU' && <RcuTab/>
-                }
-                 {
-                  role == 'Perfil' && <PerfilTab />
-                }
+            <div className="mx-10 border my-4 bg-white shadow rounded-xl p-5 mb-4">
+
+                {role== 'Consultas' && <ConsultasTab /> }
+                {role == 'Exames' && <ExamesTab /> }
+                { role == 'Meu RCU' && <RcuTab/>}
+                { role == 'Perfil' && <PerfilTab />}
            </div>
            
         </div>

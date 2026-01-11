@@ -68,13 +68,12 @@ export default function Entrar(){
                             {errors.password && <p className='text-xs text-red-600'>{errors.password.message}</p>}
                         </div>
 
-                      <button type="submit" className="bg-blue-500 text-white hover:bg-blue-400 w-full h-10 rounded-xl">Entrar</button>
+                     <button type="submit" className="bg-blue-500 text-white hover:bg-blue-400 w-full h-10 rounded-xl">Entrar</button>
+
                     </form>
 
                     )
-                }
-               
-                {
+                
                     role === 'clinico' && (
                     <form action="" className="space-y-3 w-full justify-center flex items-center flex-col px-10">
                         <h2 className="text-lg font-bold py-4">Login Clínico</h2>

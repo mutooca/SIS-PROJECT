@@ -98,7 +98,6 @@ export default function Consulta(){
                         </div>
                     </div>
                     <button onClick={() => setConsultaSelecionada(item)} className="hover:bg-blue-700 text-white transition py-1 px-5 rounded-lg text-center font-semibold flex items-center gap-2 border-2 border-blue-500 bg-blue-500" >Iniciar Consulta</button>
-                
                     {
                         consultaSelecionada && (
                             <div className="fixed inset-0 bg-black backdrop-blur-sm bg-opacity-50 flex items-center py-4 justify-center z-50">

@@ -3,9 +3,7 @@ import { GoCalendar, GoGear, GoLog, GoPersonAdd, GoPulse } from "react-icons/go"
 import ButtonAdmin from "./ButtonAdmin";
 import { Outlet } from "react-router-dom";
 
-
 export default function Index(){
-
     
     return (
         <div className="bg-zinc-100">

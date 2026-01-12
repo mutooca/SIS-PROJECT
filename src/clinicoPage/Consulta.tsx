@@ -80,8 +80,6 @@ export default function Consulta(){
         }
     }
 
-
-
     return(
         <div>
             
@@ -100,59 +98,59 @@ export default function Consulta(){
                     <button onClick={() => setConsultaSelecionada(item)} className="hover:bg-blue-700 text-white transition py-1 px-5 rounded-lg text-center font-semibold flex items-center gap-2 border-2 border-blue-500 bg-blue-500" >Iniciar Consulta</button>
                     {
                         consultaSelecionada && (
-                            <div className="fixed inset-0 bg-black backdrop-blur-sm bg-opacity-50 flex items-center py-4 justify-center z-50">
-                                <div className="bg-gray-50 rounded-lg p-6 w-full max-w-4xl max-h-full mx-4">
-                                    <form action="">
-                                        <div className="flex items.center justify-between mb-4">
-                                            <div>
-                                                <h2 className="text-2xl font-semibold ">Consulta em Andamento</h2>
-                                                <p className="text-sm text-zinc-600 mt-1 mb-2">Preencha cuidadosamente as informações clínicas da consulta. Estes dados farão parte do histórico médico do paciente e não poderão ser alterados após a finalização.</p>   
-                                                <p className="text-zinc-700">Paciente: {consultaSelecionada.nome} - Nº {consultaSelecionada.numeroUtilizador} </p>
-                                            </div>
-                                            <button onClick={() => setConsultaSelecionada(null)} className="hover:text-red-700 right-4 text-gray-600 hover:text-gray-800 text-2xl font-bold"><FiX/></button>
-                                        </div> 
-                                        <div className="space-y-4 max-h-[60vh] overflow-y-auto">
-                                            
-                                            <div className="space-y-2">
-                                                <label htmlFor="prescricao" className="font-semibold">Sintomas Apresentados:</label>
-                                                <textarea id="prescricao" className="w-full h-28 border bg-zinc-50 rounded-lg p-4 outline-blue-500 border" placeholder="Liste os sintomas relatados pelo paciente..."></textarea>     
-                                            </div>
-                                            <div className="space-y-2">
-                                                <label htmlFor="exames" className="font-semibold">Procedimentos Realizados:</label>
-                                                <textarea id="exames" className="w-full h-28 border bg-zinc-50 rounded-lg p-4 outline-blue-500 border" placeholder="Procedimentos realizados durante a consulta"></textarea>
-                                            </div>
-                                            <div className="space-y-2">
-                                                <label htmlFor="exames" className="font-semibold">Diagnóstico:</label>
-                                                <textarea id="exames" className="w-full h-28 border bg-zinc-50 rounded-lg p-4 outline-blue-500 border" placeholder="Diagnóstico da consulta"></textarea>
-                                            </div>
-                                            <div className="space-y-2">
-                                                <label htmlFor="exames" className="font-semibold">Observações Adicionais (opcional):</label>
-                                                <textarea id="exames" className="w-full h-28 border bg-zinc-50 rounded-lg p-4 outline-blue-500 border" placeholder="Notas adicionais sobre a consulta"></textarea>
-                                            </div>
+                        <div className="fixed inset-0 bg-black backdrop-blur-sm bg-opacity-50 flex items-center py-4 justify-center z-50">
+                            <div className="bg-gray-50 rounded-lg p-6 w-full max-w-4xl max-h-full mx-4">
+                                <form action="">
+                                    <div className="flex items.center justify-between mb-4">
+                                        <div>
+                                            <h2 className="text-2xl font-semibold ">Consulta em Andamento</h2>
+                                            <p className="text-sm text-zinc-600 mt-1 mb-2">Preencha cuidadosamente as informações clínicas da consulta. Estes dados farão parte do histórico médico do paciente e não poderão ser alterados após a finalização.</p>   
+                                            <p className="text-zinc-700">Paciente: {consultaSelecionada.nome} - Nº {consultaSelecionada.numeroUtilizador} </p>
                                         </div>
-                                        <div className="flex items-center justify-end mt-6 gap-4">
-                                            <button type="button" onClick={() => finalizarConsulta('guardar')} className="bg-blue-500 text-white transition py-1 px-5 rounded-lg text-center font-semibold " >
-                                            Finalizar e Guardar Consulta</button>
-                                            <button type="button" onClick={() => setConsultaSelecionada(null)} className=" hover:bg-blue-500 hover:text-white transition py-1 px-10 border-2 border-blue-400 text-blue-400 font-semibold rounded-lg hover:bg-blue-50 transition">Cancelar</button>
+                                        <button onClick={() => setConsultaSelecionada(null)} className="hover:text-red-700 right-4 text-gray-600 hover:text-gray-800 text-2xl font-bold"><FiX/></button>
+                                    </div> 
+                                    <div className="space-y-4 max-h-[60vh] overflow-y-auto">
+                                        
+                                        <div className="space-y-2">
+                                            <label htmlFor="prescricao" className="font-semibold">Sintomas Apresentados:</label>
+                                            <textarea id="prescricao" className="w-full h-28 border bg-zinc-50 rounded-lg p-4 outline-blue-500 border" placeholder="Liste os sintomas relatados pelo paciente..."></textarea>     
                                         </div>
-                                    </form>
-                                    {
-                                        showConfirm && (
-                                            <div className="bg-black inset-0 bg-opacity-50 fixed flex items-center justify-center z-60">
-                                                <div className="bg-gray-50 w-full max-w-2xl max-h-full rounded-lg mx-4 p-4">
-                                                    <h2 className="text-xl font-semibold text-green-600">✔ Consulta finalizada com sucesso</h2>
-                                                    <p className="text-zinc-600 mt-2 text-sm">A consulta foi registada com sucesso. Agora pode optar por adicionar a terapêutica associada ou enviar os dados diretamente para o RCU.</p>
-                                                    <div className="flex items-center justify-end gap-4 mt-6">
-                                                        <button onClick={() => setShowModalTerapeutica(true)} className="hover:bg-blue-700 bg-blue-500 text-white transition py-1 px-5 rounded-lg text-center font-semibold flex items-center gap-2" > <AiFillEdit /> Sim, escrever terapêutica</button>
-                                                        <button onClick={() => finalizarConsulta('rcu')} className="bg-gray-300 hover:bg-gray-400 transition py-1 px-5 rounded-lg text-center font-semibold flex items-center gap-2" >
-                                                        <Send />Enviar para RCU</button>
-                                                    </div>
+                                        <div className="space-y-2">
+                                            <label htmlFor="exames" className="font-semibold">Procedimentos Realizados:</label>
+                                            <textarea id="exames" className="w-full h-28 border bg-zinc-50 rounded-lg p-4 outline-blue-500 border" placeholder="Procedimentos realizados durante a consulta"></textarea>
+                                        </div>
+                                        <div className="space-y-2">
+                                            <label htmlFor="exames" className="font-semibold">Diagnóstico:</label>
+                                            <textarea id="exames" className="w-full h-28 border bg-zinc-50 rounded-lg p-4 outline-blue-500 border" placeholder="Diagnóstico da consulta"></textarea>
+                                        </div>
+                                        <div className="space-y-2">
+                                            <label htmlFor="exames" className="font-semibold">Observações Adicionais (opcional):</label>
+                                            <textarea id="exames" className="w-full h-28 border bg-zinc-50 rounded-lg p-4 outline-blue-500 border" placeholder="Notas adicionais sobre a consulta"></textarea>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center justify-end mt-6 gap-4">
+                                        <button type="button" onClick={() => finalizarConsulta('guardar')} className="bg-blue-500 text-white transition py-1 px-5 rounded-lg text-center font-semibold " >
+                                        Finalizar e Guardar Consulta</button>
+                                        <button type="button" onClick={() => setConsultaSelecionada(null)} className=" hover:bg-blue-500 hover:text-white transition py-1 px-10 border-2 border-blue-400 text-blue-400 font-semibold rounded-lg hover:bg-blue-50 transition">Cancelar</button>
+                                    </div>
+                                </form>
+                                {
+                                    showConfirm && (
+                                        <div className="bg-black inset-0 bg-opacity-50 fixed flex items-center justify-center z-60">
+                                            <div className="bg-gray-50 w-full max-w-2xl max-h-full rounded-lg mx-4 p-4">
+                                                <h2 className="text-xl font-semibold text-green-600">✔ Consulta finalizada com sucesso</h2>
+                                                <p className="text-zinc-600 mt-2 text-sm">A consulta foi registada com sucesso. Agora pode optar por adicionar a terapêutica associada ou enviar os dados diretamente para o RCU.</p>
+                                                <div className="flex items-center justify-end gap-4 mt-6">
+                                                    <button onClick={() => setShowModalTerapeutica(true)} className="hover:bg-blue-700 bg-blue-500 text-white transition py-1 px-5 rounded-lg text-center font-semibold flex items-center gap-2" > <AiFillEdit /> Sim, escrever terapêutica</button>
+                                                    <button onClick={() => finalizarConsulta('rcu')} className="bg-gray-300 hover:bg-gray-400 transition py-1 px-5 rounded-lg text-center font-semibold flex items-center gap-2" >
+                                                    <Send />Enviar para RCU</button>
                                                 </div>
                                             </div>
-                                        )
-                                    }
-                                </div>
+                                        </div>
+                                    )
+                                }
                             </div>
+                        </div>
                         )
                     }
 

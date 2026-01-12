@@ -41,7 +41,6 @@ export default function addAdmin(){
                         {errors.email && <p className='text-xs text-red-600'>{errors.email.message}</p>}
                     </div>
                 </div>
-
                 <div className="grid sm:grid-cols-2 gap-4">
                     <div className="space-y-1">
                         <label className="font-semibold">Telefone</label>

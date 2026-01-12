@@ -150,7 +150,7 @@ export default function AddClinico(){
                         </div>
                     </div> 
                     <div className="space-y-2 flex flex-col w-full">
-                        <label htmlFor="numeroOrdem" className="font-semibold">Definir Dias de Atendimento</label>
+                        <label htmlFor="" className="font-semibold">Definir Dias de Atendimento</label>
                         <div className="grid grid-cols-3 gap-2 font-semibold">
                             {
                                 ['Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado', 'Domingo'].map(dia =>

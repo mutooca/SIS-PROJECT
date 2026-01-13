@@ -13,9 +13,12 @@ const createNewEspecialidadeSchema = z.object({
     senha: z.string().min(6, 'A senha deve ter no mínimo 6 caracteres'),
     email: z.email('Insira um e-mail válido'),
     telefone: z.string().regex(/^\d{9}$/, 'Insira um número de telefone válido'),
+})
+
+const horarioSchema = z.object({
     horaInicial: z.string().min(1, 'A hora inicial é obrigatória'),
     horaFinal: z.string().min(1, 'A hora final é obrigatória'),
-    diasAtendimento: z.array(z.string().min(1, 'Seleccione pelo menos um dia de atendimento'))
+    diasAtendimento: z.array(z.string()).min(1, 'Seleccione pelo menos um dia de atendimento')
 })
 
 const especialidade = [
@@ -37,19 +40,31 @@ const especialidade = [
 ]
 
 type newEspecialidadeData = z.infer<typeof createNewEspecialidadeSchema>
+type horarioData = z.infer<typeof horarioSchema>
 
 export default function EspecialidadeAdmin (){
 
      
-        const { register, 
-            formState: { errors},
-            handleSubmit
+        const { register: registerEspecialidade, 
+            formState: { errors: errorsEspecialidade},
+            handleSubmit: handleSubmitEspecialidade
         } = useForm({
             resolver: zodResolver(createNewEspecialidadeSchema)}
         )
 
+          const {
+                register: registerHorario, 
+                formState: { errors: errorsHorario},
+                handleSubmit: handleSubmitHorario
+            } = useForm({
+                resolver: zodResolver(horarioSchema)}
+            ) 
         
     async function handleNewEspecialidade (data: newEspecialidadeData)  {
+        console.log(data)
+    }
+        
+    async function handleNewHorario (data: horarioData)  {
         console.log(data)
     }
 
@@ -70,48 +85,50 @@ export default function EspecialidadeAdmin (){
             <TitleGestao title="Gestão de Especialidades" p="Criar especialidades e definir horários"/>
             
                 <h3 className="font-semibold text-lg my-8">Nova Especialidade</h3>
-                <form className=' w-full' onSubmit={handleSubmit(handleNewEspecialidade)}>
+                <form className=' w-full' onSubmit={handleSubmitEspecialidade(handleNewEspecialidade)}>
                     <div className="space-y-1 flex flex-col w-full">
                         <label htmlFor="name" className="font-semibold">Nome da Especialidade</label>
-                        <input {...register('nome')} type="text" name="nome" id="nome" placeholder="ex: Dermatologia" className="max-w-full h-12 border bg-zinc-50 rounded-lg pl-4 bg-indigo-50 outline-blue-500 border" />
-                        {errors.nome  && <p className='text-xs text-red-600'>{errors.nome.message}</p>}
+                        <input {...registerEspecialidade('nome')} type="text" name="nome" id="nome" placeholder="ex: Dermatologia" className="max-w-full h-12 border bg-zinc-50 rounded-lg pl-4 bg-indigo-50 outline-blue-500 border" />
+                        {errorsEspecialidade.nome  && <p className='text-xs text-red-600'>{errorsEspecialidade.nome.message}</p>}
                     </div>
                     <div className="space-y-1 flex flex-col w-full">
                         <label htmlFor="descricao" className="font-semibold">Descrição</label>
-                        <textarea rows={3} {...register('descricao')} name="descricao" id="descricao" className="max-w-full border bg-zinc-50 rounded-lg pl-4 bg-indigo-50 outline-blue-500 border" placeholder="Descrição da especialidade" />
-                        {errors.descricao  && <p className='text-xs text-red-600'>{errors.descricao.message}</p>}
+                        <textarea rows={3} {...registerEspecialidade('descricao')} name="descricao" id="descricao" className="max-w-full border bg-zinc-50 rounded-lg pl-4 bg-indigo-50 outline-blue-500 border" placeholder="Descrição da especialidade" />
+                        {errorsEspecialidade.descricao  && <p className='text-xs text-red-600'>{errorsEspecialidade.descricao.message}</p>}
                     </div>
                     
-                        <div className='grid grid-cols-2 gap-4 w-full'>
-                            
-                            <div className="space-y-1 flex flex-col w-full">
-                                <label htmlFor="horaInicial" className="font-semibold">Horario do Inicio</label>
-                                <input {...register('horaInicial')} type="time" name="horaInicial" id="horaInicial" placeholder="--:--" className="max-w-full h-12 border bg-zinc-50 rounded-lg pl-4 bg-indigo-50 outline-blue-500 border" />
-                                {errors.horaInicial  && <p className='text-xs text-red-600'>{errors.horaInicial.message}</p>}
-                            </div>
-                            <div className="space-y-1 flex flex-col w-full">
-                                <label htmlFor="horaFinal" className="font-semibold">Horario do fim</label>
-                                <input {...register('horaFinal')} type="time" name="horaFinal" id="horaFinal" placeholder="--:--" className="max-w-full h-12 border bg-zinc-50 rounded-lg pl-4 bg-indigo-50 outline-blue-500 border" />
-                                {errors.horaFinal  && <p className='text-xs text-red-600'>{errors.horaFinal.message}</p>}
-                            </div>
-                        </div> 
+                    <button type="submit" className="bg-blue-500 text-white mt-8 hover:bg-blue-400 w-full h-10 rounded-xl">Criar Especialidade</button>
+                </form>
+                <h3 className="font-semibold text-lg my-8">Definir Horário de Atendimento</h3>
+                <form className=' w-full' onSubmit={handleSubmitHorario(handleNewHorario)}>
+                    <div className='grid grid-cols-2 gap-4 w-full'>
+                        <div className="space-y-1 flex flex-col w-full">
+                            <label htmlFor="horaInicial" className="font-semibold">Horario do Inicio</label>
+                            <input {...registerHorario('horaInicial')} type="time" name="horaInicial" id="horaInicial" placeholder="--:--" className="max-w-full h-12 border bg-zinc-50 rounded-lg pl-4 bg-indigo-50 outline-blue-500 border" />
+                            {errorsHorario.horaInicial  && <p className='text-xs text-red-600'>{errorsHorario.horaInicial.message}</p>}
+                        </div>
+                        <div className="space-y-1 flex flex-col w-full">
+                            <label htmlFor="horaFinal" className="font-semibold">Horario do fim</label>
+                            <input {...registerHorario('horaFinal')} type="time" name="horaFinal" id="horaFinal" placeholder="--:--" className="max-w-full h-12 border bg-zinc-50 rounded-lg pl-4 bg-indigo-50 outline-blue-500 border" />
+                            {errorsHorario.horaFinal  && <p className='text-xs text-red-600'>{errorsHorario.horaFinal.message}</p>}
+                        </div>
+                    </div> 
                     <div className="space-y-2 flex flex-col w-full">
                         <label htmlFor="" className="font-semibold">Definir Dias de Atendimento</label>
                         <div className="grid grid-cols-3 gap-2 font-semibold">
                             {['Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado', 'Domingo'].map(day => (
                                 
                                 <label key={day} htmlFor={day} className="flex items-center gap-2">
-                                    <input {...register('diasAtendimento')} type="checkbox" name={day} id={day} />
+                                    <input {...registerHorario('diasAtendimento')} type="checkbox" name={day} id={day} />
                                     {day}
                                 </label>
                             ))
                             }
                         </div>
-                        {errors.diasAtendimento  && <p className='text-xs text-red-600'>{errors.diasAtendimento.message}</p>}
+                        {errorsHorario.diasAtendimento  && <p className='text-xs text-red-600'>{errorsHorario.diasAtendimento.message}</p>}
                     </div>
-                    <button type="submit" className="bg-blue-500 text-white mt-8 hover:bg-blue-400 w-full h-10 rounded-xl">Criar Especialidade</button>
+                    <button type="submit" className="bg-blue-500 text-white mt-8 hover:bg-blue-400 w-full h-10 rounded-xl">Definir Horário</button>
                 </form>
-
                 <div className="space-y-3">
                     <h3 className="font-semibold text-xl my-8">Especialidades Activas</h3>
                     {

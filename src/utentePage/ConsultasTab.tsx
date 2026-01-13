@@ -35,15 +35,15 @@ const medicosMock = [
 
 /*===========SCHEMA ========= */
 const consultaSchema = z.object({
-  especialidadeId: z.string().min(1, "Selecione a especialidade"),
-  medicoId: z.string().min(1, "Selecione o médico"),
+  especialidadeId: z.string().min(1, "Seleccione a especialidade"),
+  medicoId: z.string().min(1, "Seleccione o médico"),
   data: z.string().min(1, "Data obrigatória").refine((value) => !isNaN(Date.parse(value)), {
     message: "Insira uma data válida",
   }).refine((value) => {
     const hoje = new Date();
     const dataSelecionada = new Date(value);
     return dataSelecionada >= new Date(hoje.toDateString()); 
-  }, { message: "Não pode selecionar uma data anterior à atual" }),
+  }, { message: "Não pode seleccionar uma data anterior à actual" }),
 
   hora: z.string().min(1, "Hora obrigatória"),
 });

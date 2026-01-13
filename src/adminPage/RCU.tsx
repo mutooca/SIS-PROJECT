@@ -23,6 +23,13 @@ export const utentes = [
     numeroEntidade: "SEG789456",
   },
   {
+    id: 1,
+    nome: "Jordan Miguel Pedro",
+    numeroIdentificador: "123456",
+    nomeEntidade: "ACMS Seguros",
+    numeroEntidade: "SEG789456",
+  },
+  {
     id: 2,
     nome: "Maria João Lopes",
     numero: "654321",
@@ -64,14 +71,20 @@ export default function RCU(){
     const [utente, setUtente] = useState<any>(null)
     const [loading, setLoading] = useState(false)
 
-async function buscarUtentePorNome(nome: string) {
-    return new Promise((resolve, reject) => {   
+    function normalizeString(str: string) {
+        return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
+    }
+
+    async function buscarUtentePorNome(nome: string) {
+    return new Promise((resolve) => {   
         setTimeout(() => {
-            const utente = utentes.find(u => u.nome.toLowerCase().includes(nome.toLowerCase()) );
-            if (utente) {
-                resolve(utente);
+            const termo = normalizeString(nome)
+
+            const resultados = utentes.filter(u => normalizeString(u.nome).includes(termo))[0]
+            if (resultados) {
+                resolve(resultados);
             } else {
-                reject('Utente não encontrado');
+                resolve([])
             }
         }, 1000);
     });

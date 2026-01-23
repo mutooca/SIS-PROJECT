@@ -89,7 +89,7 @@ export default function ExamesTab() {
                         <div className="flex flex-col w-full space-y-1">
                           <label htmlFor="tipoDeExame" className="font-semibold text-zinc-800">Tipo de Exame</label>
                           <select  {...register("tipoDeExame")}
-                                   onChange={handleExameChange} name="tipoDeExame" id="tipoDeExame" className="rounded-lg bg-indigo-50 border h-12 px-2 max-w-full outline-0 " >
+                                   onChange={handleExameChange} name="tipoDeExame" id="tipoDeExame" className="rounded-lg bg-indigo-50 border h-12 px-2 max-w-full outline-blue-500 " >
                             <option value="" >Selecione o exame...</option>
                            <optgroup label="⚠️ Requerem prescrição">
                                 <option value="Radiografia" >Radiografia</option>
@@ -110,14 +110,14 @@ export default function ExamesTab() {
                         </div>
                         <div className="flex flex-col space-y-1 w-full">
                           <label htmlFor="data" className="font-semibold text-zinc-800">Data </label>
-                          <input {...register('data')}  type="date" name="data"  placeholder="dd/mm/aaaa" className="rounded-lg bg-indigo-50 h-12 px-2 max-w-full border outline-0" />
+                          <input {...register('data')}  type="date" name="data"  placeholder="dd/mm/aaaa" className="rounded-lg bg-indigo-50 h-12 px-2 max-w-full border outline-blue-500" />
                           {errors.data && <p className="test-xs text-red-600">{errors.data.message}</p>}
                         </div>
                       </div>
                        
                       <div className="flex flex-col space-y-1 my-2">
                         <label htmlFor="hora" className="text-zinc-800 font-semibold">Hora </label>
-                        <input {...register('hora')}  type="time" placeholder="--:--" className=" h-12 px-2 rounded-lg bg-indigo-50 max-w-full border outline-0" />
+                        <input {...register('hora')}  type="time" placeholder="--:--" className=" h-12 px-2 rounded-lg bg-indigo-50 max-w-full border outline-blue-500" />
                         {errors.hora && (<p className="text-xs text-red-600">{errors.hora.message}</p>)}
                       </div>
 

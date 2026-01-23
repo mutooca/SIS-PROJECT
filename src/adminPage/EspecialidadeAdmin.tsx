@@ -7,12 +7,18 @@ import { FiCheck, FiEdit, FiTrash, FiXCircle } from "react-icons/fi";
 import { useState } from "react";
 
 const createNewEspecialidadeSchema = z.object({
-    nameEspecialidade: z.string(),
-    numeroOrdem: z.string(),
-    senha: z.string(),
-    email: z.email(),
-    especialidade: z.string(),
-    telefone: z.string()
+    nome: z.string().min(3, 'O nome da especialidade é obrigatório'),
+    numeroOrdem: z.string().min(3, 'O número de ordem é obrigatório'),
+    descricao: z.string().min(10, 'A descrição deve ter no mínimo 10 caracteres'),
+    senha: z.string().min(6, 'A senha deve ter no mínimo 6 caracteres'),
+    email: z.email('Insira um e-mail válido'),
+    telefone: z.string().regex(/^\d{9}$/, 'Insira um número de telefone válido'),
+})
+
+const horarioSchema = z.object({
+    horaInicial: z.string().min(1, 'A hora inicial é obrigatória'),
+    horaFinal: z.string().min(1, 'A hora final é obrigatória'),
+    diasAtendimento: z.array(z.string()).min(1, 'Seleccione pelo menos um dia de atendimento')
 })
 
 const especialidade = [
@@ -34,19 +40,31 @@ const especialidade = [
 ]
 
 type newEspecialidadeData = z.infer<typeof createNewEspecialidadeSchema>
+type horarioData = z.infer<typeof horarioSchema>
 
 export default function EspecialidadeAdmin (){
 
      
-        const { register, 
-            formState: { errors},
-            handleSubmit
+        const { register: registerEspecialidade, 
+            formState: { errors: errorsEspecialidade},
+            handleSubmit: handleSubmitEspecialidade
         } = useForm({
             resolver: zodResolver(createNewEspecialidadeSchema)}
         )
 
+          const {
+                register: registerHorario, 
+                formState: { errors: errorsHorario},
+                handleSubmit: handleSubmitHorario
+            } = useForm({
+                resolver: zodResolver(horarioSchema)}
+            ) 
         
-    async function handleNewClinico (data: newEspecialidadeData)  {
+    async function handleNewEspecialidade (data: newEspecialidadeData)  {
+        console.log(data)
+    }
+        
+    async function handleNewHorario (data: horarioData)  {
         console.log(data)
     }
 
@@ -67,67 +85,50 @@ export default function EspecialidadeAdmin (){
             <TitleGestao title="Gestão de Especialidades" p="Criar especialidades e definir horários"/>
             
                 <h3 className="font-semibold text-lg my-8">Nova Especialidade</h3>
-                <form className=' w-full' onSubmit={handleSubmit(handleNewClinico)}>
+                <form className=' w-full' onSubmit={handleSubmitEspecialidade(handleNewEspecialidade)}>
                     <div className="space-y-1 flex flex-col w-full">
                         <label htmlFor="name" className="font-semibold">Nome da Especialidade</label>
-                        <input {...register('especialidade')} type="text" name="especialidade" id="especialidade" placeholder="ex: Dermatologia" className="max-w-full h-12 border bg-zinc-50 rounded-lg pl-4 bg-indigo-50 outline-blue-500 border" />
-                        {errors.especialidade  && <p className='text-xs text-red-600'>{errors.especialidade.message}</p>}
+                        <input {...registerEspecialidade('nome')} type="text" name="nome" id="nome" placeholder="ex: Dermatologia" className="max-w-full h-12 border bg-zinc-50 rounded-lg pl-4 bg-indigo-50 outline-blue-500 border" />
+                        {errorsEspecialidade.nome  && <p className='text-xs text-red-600'>{errorsEspecialidade.nome.message}</p>}
                     </div>
                     <div className="space-y-1 flex flex-col w-full">
-                        <label htmlFor="name" className="font-semibold">Descrição</label>
-                        <textarea rows={3} {...register('especialidade')} name="especialidade" id="especialidade" className="max-w-full border bg-zinc-50 rounded-lg pl-4 bg-indigo-50 outline-blue-500 border" placeholder="Descrição da especialidade" />
-                        {errors.especialidade  && <p className='text-xs text-red-600'>{errors.especialidade.message}</p>}
+                        <label htmlFor="descricao" className="font-semibold">Descrição</label>
+                        <textarea rows={3} {...registerEspecialidade('descricao')} name="descricao" id="descricao" className="max-w-full border bg-zinc-50 rounded-lg pl-4 bg-indigo-50 outline-blue-500 border" placeholder="Descrição da especialidade" />
+                        {errorsEspecialidade.descricao  && <p className='text-xs text-red-600'>{errorsEspecialidade.descricao.message}</p>}
                     </div>
                     
-                        <div className='grid grid-cols-2 gap-4 w-full'>
-                            <div className="space-y-1 flex flex-col w-full">
-                                <label htmlFor="name" className="font-semibold">Novo Início</label>
-                                <input {...register('nameEspecialidade')} type="time" name="nameEspecialidade" id="nameEspecialidade" placeholder="--:--" className="max-w-full h-12 border bg-zinc-50 rounded-lg pl-4 bg-indigo-50 outline-blue-500 border" />
-                                {errors.nameEspecialidade  && <p className='text-xs text-red-600'>{errors.nameEspecialidade.message}</p>}
-                            </div>
-                            <div className="space-y-1 flex flex-col w-full">
-                                <label htmlFor="numeroOrdem" className="font-semibold">Horario do fim</label>
-                                <input {...register('numeroOrdem')} type="time" name="numeroOrdem" id="numeroOrdem" placeholder="--:--" className="max-w-full h-12 border bg-zinc-50 rounded-lg pl-4 bg-indigo-50 outline-blue-500 border" />
-                                {errors.numeroOrdem  && <p className='text-xs text-red-600'>{errors.numeroOrdem.message}</p>}
-                            </div>
-                        </div> 
-                    <div className="space-y-2 flex flex-col w-full">
-                        <label htmlFor="numeroOrdem" className="font-semibold">Definir Dias de Atendimento</label>
-                        <div className="grid grid-cols-3 gap-2 font-semibold">
-                            <div className="flex items-center gap-2 border-r">
-                                <input type="checkbox" name="segunda" id="segunda" />
-                                <label htmlFor="segunda">Segunda-feira</label>
-                            </div>
-                            <div className="flex items-center gap-2 border-r">
-                                <input type="checkbox" name="terca" id="terca" />
-                                <label htmlFor="terca">Terça-feira</label>
-                            </div>
-                            <div className="flex items-center gap-2 border-r">
-                                <input type="checkbox" name="quarta" id="quarta" />
-                                <label htmlFor="quarta">Quarta-feira</label>
-                            </div>
-                            <div className="flex items-center gap-2 border-r">
-                                <input type="checkbox" name="quinta" id="quinta" />
-                                <label htmlFor="quinta">Quinta-feira</label>
-                            </div>
-                            <div className="flex items-center gap-2 border-r">
-                                <input type="checkbox" name="sexta" id="sexta" />
-                                <label htmlFor="sexta">Sexta-feira</label>
-                            </div>
-                            <div className="flex items-center gap-2 border-r">
-                                <input type="checkbox" name="Sabado" id="Sabado" />
-                                <label htmlFor="Sabado">Sábado</label>
-                            </div>
-                            <div className="flex items-center gap-2 border-r">
-                                <input type="checkbox" name="domingo" id="domingo" />
-                                <label htmlFor="domingo">Domingo</label>
-                            </div>
-                        </div>
-                        {errors.numeroOrdem  && <p className='text-xs text-red-600'>{errors.numeroOrdem.message}</p>}
-                    </div>
                     <button type="submit" className="bg-blue-500 text-white mt-8 hover:bg-blue-400 w-full h-10 rounded-xl">Criar Especialidade</button>
                 </form>
-
+                <h3 className="font-semibold text-lg my-8">Definir Horário de Atendimento</h3>
+                <form className=' w-full' onSubmit={handleSubmitHorario(handleNewHorario)}>
+                    <div className='grid grid-cols-2 gap-4 w-full'>
+                        <div className="space-y-1 flex flex-col w-full">
+                            <label htmlFor="horaInicial" className="font-semibold">Horario do Inicio</label>
+                            <input {...registerHorario('horaInicial')} type="time" name="horaInicial" id="horaInicial" placeholder="--:--" className="max-w-full h-12 border bg-zinc-50 rounded-lg pl-4 bg-indigo-50 outline-blue-500 border" />
+                            {errorsHorario.horaInicial  && <p className='text-xs text-red-600'>{errorsHorario.horaInicial.message}</p>}
+                        </div>
+                        <div className="space-y-1 flex flex-col w-full">
+                            <label htmlFor="horaFinal" className="font-semibold">Horario do fim</label>
+                            <input {...registerHorario('horaFinal')} type="time" name="horaFinal" id="horaFinal" placeholder="--:--" className="max-w-full h-12 border bg-zinc-50 rounded-lg pl-4 bg-indigo-50 outline-blue-500 border" />
+                            {errorsHorario.horaFinal  && <p className='text-xs text-red-600'>{errorsHorario.horaFinal.message}</p>}
+                        </div>
+                    </div> 
+                    <div className="space-y-2 flex flex-col w-full">
+                        <label htmlFor="" className="font-semibold">Definir Dias de Atendimento</label>
+                        <div className="grid grid-cols-3 gap-2 font-semibold">
+                            {['Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado', 'Domingo'].map(day => (
+                                
+                                <label key={day} htmlFor={day} className="flex items-center gap-2">
+                                    <input {...registerHorario('diasAtendimento')} type="checkbox" name={day} id={day} />
+                                    {day}
+                                </label>
+                            ))
+                            }
+                        </div>
+                        {errorsHorario.diasAtendimento  && <p className='text-xs text-red-600'>{errorsHorario.diasAtendimento.message}</p>}
+                    </div>
+                    <button type="submit" className="bg-blue-500 text-white mt-8 hover:bg-blue-400 w-full h-10 rounded-xl">Definir Horário</button>
+                </form>
                 <div className="space-y-3">
                     <h3 className="font-semibold text-xl my-8">Especialidades Activas</h3>
                     {
@@ -138,7 +139,7 @@ export default function EspecialidadeAdmin (){
 
                                 <div className="text-zinc-700 space-y-2">
                                     <p><span className="font-semibold">Descrição: </span>{item.descricao}</p>
-                                    <p><span className="font-semibold">Dias de Atendimento: </span>{item.diasAtendimento.map(item => item.concat(' '))}: {item.horaInicio} - {item.horaFim}</p>
+                                    <p><span className="font-semibold">Dias de Atendimento: </span>{item.diasAtendimento.map(item => item.concat(', '))} {item.horaInicio} - {item.horaFim}</p>
                                 </div>
                                 
                             </div>

@@ -9,14 +9,14 @@ const createNewClinicoSchema = z.object({
     numeroOrdem: z.string().min(3, 'O número de ordem deve ter no mínimo 3 caracteres'),
     senha: z.string().min(6, 'A senha deve ter no mínimo 6 caracteres'),
     email: z.email('Insira um e-mail válido'),
-    especialidade: z.string(),
+    especialidade: z.string().min(1, 'A especialidade é obrigatória'),
     telefone: z.string().min(9, 'O telefone deve ter no exatamente 9 caracteres'),
 })
 
 const horarioSchema = z.object({
-    horaInicial: z.string(),
-    horaFinal: z.string(),
-    diasAtendimento: z.array(z.string().min(1, 'Seleccione pelo menos um dia de atendimento'))
+    horaInicial: z.string().min(1, 'A hora inicial é obrigatória'),
+    horaFinal: z.string().min(1, 'A hora final é obrigatória'),
+    diasAtendimento: z.array(z.string()).min(1, 'Seleccione pelo menos um dia de atendimento')
 })
 
 const clinico = [
@@ -150,7 +150,7 @@ export default function AddClinico(){
                         </div>
                     </div> 
                     <div className="space-y-2 flex flex-col w-full">
-                        <label htmlFor="numeroOrdem" className="font-semibold">Definir Dias de Atendimento</label>
+                        <label htmlFor="" className="font-semibold">Definir Dias de Atendimento</label>
                         <div className="grid grid-cols-3 gap-2 font-semibold">
                             {
                                 ['Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado', 'Domingo'].map(dia =>

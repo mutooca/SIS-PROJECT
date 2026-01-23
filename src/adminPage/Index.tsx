@@ -3,9 +3,7 @@ import { GoCalendar, GoGear, GoLog, GoPersonAdd, GoPulse } from "react-icons/go"
 import ButtonAdmin from "./ButtonAdmin";
 import { Outlet } from "react-router-dom";
 
-
 export default function Index(){
-
     
     return (
         <div className="bg-zinc-100">
@@ -16,7 +14,6 @@ export default function Index(){
                 </div>
                  <button className="hover:bg-blue-500 hover:text-white transition py-1 px-5 rounded-lg text-center font-semibold flex items-center gap-2 border-2 border-blue-400" >Sair</button>
             </div>
-
             <div className=" max-w-full flex justify-center bg-indigo-50">
                 <nav className="grid max-w-full grid-cols-3 md:grid-cols-6 gap-4 py-1 px-2 rounded-lg ">
                     <ButtonAdmin icon={<GoPersonAdd />} theme="Mais Admin" to="addadmin" />

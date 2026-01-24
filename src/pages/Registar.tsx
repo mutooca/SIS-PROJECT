@@ -57,12 +57,7 @@ const userRegistoSchema = z.object({
     .pipe(z.string().min(3, 'O nome deve ter no mínimo 3 caracteres').max(100, 'O nome é demasiado longo').regex(/^[A-Za-zÀ-ÿ\s]+$/, 'O nome contém caracteres inválidos')
     .refine(val => val.split(' ').length >= 2, 'Informe o nome completo (nome e sobrenome)').refine(val => !val.match(/(.)\1{3,}/), 'O nome contém repetições suspeitas de caracteres')),
 
-  data: z
-  .string()
-  .min(1, 'A data de nascimento é obrigatória')
-  .refine(val => !isNaN(Date.parse(val)), 'Data inválida')
-  .refine(val => new Date(val) <= new Date(), 'Data no futuro')
-  .refine(val => {
+  data: z.string().min(1, 'A data de nascimento é obrigatória').refine(val => !isNaN(Date.parse(val)), 'Data inválida').refine(val => new Date(val) <= new Date(), 'Data no futuro').refine(val => {
     const birth = new Date(val)
     const today = new Date()
     let age = today.getFullYear() - birth.getFullYear()
@@ -77,7 +72,6 @@ const userRegistoSchema = z.object({
     .pipe(z.string().length(9, 'O telefone deve ter exatamente 9 dígitos').regex(/^9[0-9]{8}$/, 'Número de telefone inválido (deve começar com 9)')
     .refine(val => !val.match(/^(.)\1{8}$/), 'Número de telefone inválido (dígitos repetidos)')),
 
-  // ENDEREÇO
   morada: z.string().min(1, "A morada é obrigatória").transform(sanitizeMorada).refine(val => val.length > 0, 'A morada não pode estar vazia')
     .pipe(z.string().min(5, 'A morada deve ter no mínimo 5 caracteres').max(200, 'A morada é demasiado longa')),
 
@@ -101,7 +95,6 @@ const userRegistoSchema = z.object({
 })
 
 type UserRegistoData = z.infer<typeof userRegistoSchema>
-
 
 export default function Registar(){
     const {

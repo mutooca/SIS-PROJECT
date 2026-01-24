@@ -23,7 +23,6 @@ import { SlEnergy } from "react-icons/sl"
 
 export default function Home(){
     return(
-
         <div className=''>
            
             <div className="relative h-[55vh] sm:h-[65vh] xl:h-[80vh] max-w-full hoverflow-hidden">

@@ -7,9 +7,7 @@ interface props {
     to: string
 }
 
-
 export default function ButtonAdmin({icon, theme, to}: props){
-
 
     return(
        <NavLink

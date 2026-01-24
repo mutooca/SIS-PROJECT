@@ -72,6 +72,11 @@ export const createNewClinicoSchema = z.object({
   telefone: z.string().min(1, 'O telefone é obrigatório').transform(sanitizeNumberString).refine(val => val.length > 0, 'O telefone não pode estar vazio')
   .pipe(  z.string().length(9, 'O telefone deve ter exatamente 9 dígitos').regex(/^9[0-9]{8}$/, 'Número de telefone inválido (deve começar com 9)')
   .refine(  val => !val.match(/^(.)\1{8}$/),  'Número de telefone inválido (dígitos repetidos)')),
+    anoExperiencia: z.string().min(1, 'O ano de experiência é obrigatório').transform(sanitizeNumberString).refine(val => val.length > 0, 'O ano de experiência não pode estar vazio')
+    .pipe(z.string().refine(val => {
+      const num = parseInt(val, 10);
+      return !isNaN(num) && num >= 0 && num <= 60;
+    }, 'O ano de experiência deve ser um número entre 0 e 60')),
 })
 
 export const horarioSchema = z.object({horaInicial: z.string().min(1, 'A hora inicial é obrigatória').transform(sanitizeTime)
@@ -124,8 +129,6 @@ export const horarioSchema = z.object({horaInicial: z.string().min(1, 'A hora in
       });
     }
   })
-
-// ==================== DADOS MOCK ====================
 
 const clinico = [
   {
@@ -192,7 +195,7 @@ export default function AddClinico() {
     mode: 'onBlur', // Valida ao sair do campo
   })
 
-  // Form para horário
+  
   const {
     register: registerHorario,
     formState: { errors: errorsHorario, isSubmitting: isSubmittingHorario },
@@ -205,10 +208,8 @@ export default function AddClinico() {
 
   async function handleHorario(data: HorarioData) {
     try {
-      // Aqui você faria a chamada à API
       console.log('Dados do horário validados e sanitizados:', data)
       
-      // Simulação de envio para API
       await new Promise(resolve => setTimeout(resolve, 1000))
       
       alert('Horário definido com sucesso!')
@@ -264,7 +265,7 @@ export default function AddClinico() {
       {rolePc === 'addNew' && (
         <div>
           <form onSubmit={handleSubmitClinico(handleNewClinico)} className="space-y-3">
-            <h3 className="font-semibold">riar Novo Registo</h3>
+            <h3 className="font-semibold">Criar Novo Registo</h3>
             <div className="grid sm:grid-cols-2 gap-4 w-full">
               <div className="space-y-1 flex flex-col w-full">
                 <label htmlFor="name" className="font-semibold">Nome Completo</label>
@@ -358,7 +359,21 @@ export default function AddClinico() {
                 {errorsClinico.senha && <p className="text-xs text-red-600">{errorsClinico.senha.message}</p>}
                 <p className="text-xs text-gray-500">Deve conter: maiúscula, minúscula, número e caractere especial</p>
               </div>
-            </div>
+             
+            </div> 
+            <div className="space-y-1 flex flex-col w-full">
+                <label htmlFor="senha" className="font-semibold">Anos de Experiência</label>
+                <input
+                  {...registerClinico('anoExperiencia')}
+                  type="number"
+                  name="anoExperiencia"
+                  id="anoExperiencia"
+                  placeholder="ex: 5"
+                  className="max-w-full h-12 border bg-zinc-50 rounded-lg pl-4 bg-indigo-50 outline-blue-500 border"
+                  disabled={isSubmittingClinico}
+                />
+                {errorsClinico.anoExperiencia && <p className="text-xs text-red-600">{errorsClinico.anoExperiencia.message}</p>}
+             </div>
             <button
               type="submit"
               disabled={isSubmittingClinico}

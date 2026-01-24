@@ -87,7 +87,6 @@ function App() {
           <Route index element={<Navigate to={"consulta"} replace />} />
           <Route path="exame" element={<Exame />} />
           <Route path="consulta" element={<Consulta />} />
-          <Route path="horario" element={<Horario />} />
           <Route path="paciente" element={<Paciente />} />
           <Route path="perfilclinico" element={<PerfilClinico />} />
         </Route>

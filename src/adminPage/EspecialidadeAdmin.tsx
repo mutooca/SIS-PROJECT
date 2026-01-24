@@ -6,13 +6,23 @@ import TitleGestao from "../components/TitleGestao";
 import { FiCheck, FiEdit, FiTrash, FiXCircle } from "react-icons/fi";
 import { useState } from "react";
 
+const sanitizeText = (value: string) => {
+  if (!value) return '';
+  return value.trim().replace(/\s+/g, ' ') .replace(/[<>'"]/g, '') .replace(/javascript:/gi, '') .replace(/on\w+=/gi, '') .slice(0, 500); // Limita tamanho máximo
+}
+
+const sanitizeName = (value: string) => {
+  if (!value) return '';
+  return value.trim().replace(/\s+/g, ' ').replace(/[^A-Za-zÀ-ÿ\s]/g, '').slice(0, 100);
+}
+
 const createNewEspecialidadeSchema = z.object({
-    nome: z.string().min(3, 'O nome da especialidade é obrigatório'),
-    numeroOrdem: z.string().min(3, 'O número de ordem é obrigatório'),
-    descricao: z.string().min(10, 'A descrição deve ter no mínimo 10 caracteres'),
-    senha: z.string().min(6, 'A senha deve ter no mínimo 6 caracteres'),
-    email: z.email('Insira um e-mail válido'),
-    telefone: z.string().regex(/^\d{9}$/, 'Insira um número de telefone válido'),
+    nome: z.string().min(1, 'O nome da especialidade é obrigatório').transform(sanitizeName).refine(val => val.length > 0, 'O nome da especialidade não pode estar vazio após sanitização')
+      .pipe(  z.string().min(3, 'A especialidade deve ter no mínimo 3 caracteres').max(100, 'O nome da especialidade é demasiado longo').regex(/^[A-Za-zÀ-ÿ\s]+$/, 'O nome contém caracteres inválidos')
+        ),
+    descricao: z.string().min(1, 'A descrição não pode estar vazia').transform(sanitizeText).refine(val => val.length > 0, 'A descrição não pode estar vazia após sanitização')
+      .pipe(z.string().min(10, 'A descrição deve ter no mínimo 10 caracteres').max(50, 'A descrição é demasiado longa')),
+    
 })
 
 const horarioSchema = z.object({

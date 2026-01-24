@@ -5,9 +5,17 @@ import z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+const sanitizeNumber = (value: number) => {
+  if (isNaN(value) || value === null) return 0;
+  return Math.floor(value);
+}
 const duracaoSchema = z.object({
-    duracao: z.coerce.number().min(1, 'Apenas números positivos'),
-    antecedencia: z.coerce.number().min(1, 'Apenas números positivos')
+    duracao: z.union([z.number(), z.string()]).transform(val => {const num = typeof val === 'string' ? parseFloat(val) : val;return sanitizeNumber(num);})
+  .pipe(z.number().int('A duração deve ser um número inteiro').min(5, 'A duração mínima é 5 minutos').max(480, 'A duração máxima é 480 minutos (8 horas)').refine(val => val % 5 === 0, 'A duração deve ser múltiplo de 5 minutos')
+  ),
+
+    antecedencia: z.union([z.number(), z.string()]).transform(val => {const num = typeof val === 'string' ? parseFloat(val) : val;return sanitizeNumber(num); })
+  .pipe(z.number().int('A antecedência deve ser um número inteiro').min(1, 'A antecedência mínima é 1 dia').max(365, 'A antecedência máxima é 365 dias'))
 })
 const utentes = [
     { nome: 'João Pedro Silva', email: 'joao.silva@gmail.com'},

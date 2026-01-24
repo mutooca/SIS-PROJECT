@@ -16,7 +16,7 @@ export default function Utente(){
         <div className="bg-zinc-100">
             <div className="flex items-center justify-between mx-7 py-7 ">
                 <div>
-                <h1 className="font-bold text-3xl">Bem-vindo, Utente!</h1>
+                <h1 className="font-semibold text-3xl">Bem-vindo, Utente!</h1>
                 <p className="text-zinc-600">Gerir consultas, exames e RCU</p>
                 </div>
                 <button className="flex rounded-lg border-2 border-blue-500 text-sm font-semibold  bg-zinc-500 texte-blue-500 text-blue-500 hover:bg-blue-500 transition px-2 hover:text-white py-2 px-5 min-h-[40px] text-center">Terminar sessao</button>

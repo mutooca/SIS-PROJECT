@@ -8,7 +8,7 @@ import atencao from "../img/atencao.PNG";
 const exameSchema = z.object({
   tipoDeExame:z.enum(["Radiografia", "Tomografia", "Ressonancia magnética", "Electrocardiograma", "Ecografia", "Reforço", "Mamografia", "Analises Clinicas Gerais", "Medição de pressão"], "Selecione a dose aplicada"),
   data: z.string().min(1, "Data obrigatória").refine((value) => !isNaN(Date.parse(value)), {
-    message: "Insira uma data válida",
+    message: "Insira uma data válida"
   }).refine((value) => {
     const hoje = new Date();
     const dataSelecionada = new Date(value);

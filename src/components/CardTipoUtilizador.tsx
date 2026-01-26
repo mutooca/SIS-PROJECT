@@ -3,6 +3,7 @@ import { CheckCircle } from "lucide-react";
 import { GoArrowRight } from "react-icons/go";
 import { tv } from "tailwind-variants";
 import { twMerge } from "tailwind-merge";
+import { Link } from "react-router-dom";
 
 interface props {
     img: string 
@@ -12,6 +13,7 @@ interface props {
     p2: string
     p3: string
     p4?: string
+    to: string
     textButton?: string
     colorBorder?: 'blue' | 'green'
     colorButton?: 'blue' | 'green'
@@ -37,6 +39,7 @@ const card = tv({
 
 export default function CardTipoUtilizador({
     img, 
+    to,
     type, 
     text, 
     p1, 
@@ -74,10 +77,10 @@ export default function CardTipoUtilizador({
                         <p>{p4}</p>
                     </span>
 
-                    <button className={twMerge(clsx(card({colorButton})),'flex justify-center items-center w-full font-semibold gap-3 p-2 rounded-lg text-white')}>
+                    <Link to={to}><button className={twMerge(clsx(card({colorButton})),'flex justify-center items-center w-full font-semibold gap-3 p-2 rounded-lg text-white')}>
                         {textButton}
                         <GoArrowRight size={17} />
-                    </button>
+                    </button></Link>
                 </div>
             </div>
         </div>

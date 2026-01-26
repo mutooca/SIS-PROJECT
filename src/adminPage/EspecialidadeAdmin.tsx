@@ -6,6 +6,10 @@ import TitleGestao from "../components/TitleGestao";
 import { FiCheck, FiEdit, FiTrash, FiXCircle } from "react-icons/fi";
 import { useState } from "react";
 
+const sanitizeTime = (value: string) => {
+  if (!value) return '';
+  return value.replace(/[^\d:]/g, '').slice(0, 5);
+}
 const sanitizeText = (value: string) => {
   if (!value) return '';
   return value.trim().replace(/\s+/g, ' ') .replace(/[<>'"]/g, '') .replace(/javascript:/gi, '') .replace(/on\w+=/gi, '') .slice(0, 500); // Limita tamanho máximo
@@ -24,12 +28,40 @@ const createNewEspecialidadeSchema = z.object({
       .pipe(z.string().min(10, 'A descrição deve ter no mínimo 10 caracteres').max(50, 'A descrição é demasiado longa')),
     
 })
+export const horarioSchema = z.object({
+    horaInicial: z.string().min(1, 'A hora inicial é obrigatória').transform(sanitizeTime)
+    .pipe(z.string().regex(/^([01]\d|2[0-3]):([0-5]\d)$/,'Hora inicial inválida (formato HH:mm)')
+    .refine(val => {const [hours, minutes] = val.split(':').map(Number);return hours >= 0 && hours <= 23 && minutes >= 0 && minutes <= 59;},'Hora inicial fora do intervalo válido')),
 
-const horarioSchema = z.object({
-    horaInicial: z.string().min(1, 'A hora inicial é obrigatória'),
-    horaFinal: z.string().min(1, 'A hora final é obrigatória'),
-    diasAtendimento: z.array(z.string()).min(1, 'Seleccione pelo menos um dia de atendimento')
-})
+    horaFinal: z.string().min(1, 'A hora final é obrigatória').transform(sanitizeTime).pipe(z.string().regex(/^([01]\d|2[0-3]):([0-5]\d)$/,'Hora final inválida (formato HH:mm)')
+    .refine(val => {  const [hours, minutes] = val.split(':').map(Number);  return hours >= 0 && hours <= 23 && minutes >= 0 && minutes <= 59;},'Hora final fora do intervalo válido')),
+
+    diasAtendimento: z.array(z.enum([ 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado', 'Domingo',])
+ ).min(1, 'Selecione pelo menos um dia de atendimento').max(7, 'Número máximo de dias excedido')
+ .refine((dias) => new Set(dias).size === dias.length,'Dias duplicados detectados'),}).superRefine((data, ctx) => {
+    // Validação: hora final deve ser maior que hora inicial
+    if (data.horaFinal <= data.horaInicial) {
+      ctx.addIssue({
+        path: ['horaFinal'],
+        message: 'A hora final deve ser maior que a hora inicial',
+        code: z.ZodIssueCode.custom,
+      })
+    }
+
+    const [horaIni, minIni] = data.horaInicial.split(':').map(Number);
+    const [horaFim, minFim] = data.horaFinal.split(':').map(Number);
+    const minutosInicial = horaIni * 60 + minIni;
+    const minutosFinal = horaFim * 60 + minFim;
+    const diferencaMinutos = minutosFinal - minutosInicial;
+
+    if (diferencaMinutos < 60) {
+      ctx.addIssue({
+        path: ['horaFinal'],
+        message: 'O horário de atendimento deve ser de no mínimo 1 hora',
+        code: z.ZodIssueCode.custom,
+      })
+    }
+    })
 
 const especialidade = [
     {

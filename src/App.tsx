@@ -22,7 +22,6 @@ import Config from "./adminPage/Config"
 // CLÍNICO
 import IndexClinico from "./clinicoPage/IndexClinico"
 import Consulta from "./clinicoPage/Consulta"
-import Horario from "./clinicoPage/Horario"
 import Paciente from "./clinicoPage/Paciente"
 import PerfilClinico from "./clinicoPage/PerfilClinico"
 import Exame from "./clinicoPage/Exame"
@@ -33,6 +32,7 @@ import ConsultasTab from "./utentePage/ConsultasTab";
 import ExamesTab from "./utentePage/ExamesTab";
 import PerfilTab from "./utentePage/PerfilTab";
 import RcuTab from "./utentePage/RcuTab";
+import ViewUtentesCadastrados from "./adminPage/ViewUtentesCadastrados"
 
 function App() {
   const location = useLocation()
@@ -80,6 +80,8 @@ function App() {
           <Route path="marcacao" element={<Marcacao />} />
           <Route path="rcu" element={<RCU />} />
           <Route path="config" element={<Config />} />
+          <Route path="viewutentes" element={<ViewUtentesCadastrados />} />
+
         </Route>
 
         {/* CLÍNICO */}

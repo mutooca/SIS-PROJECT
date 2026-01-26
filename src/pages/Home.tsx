@@ -20,6 +20,7 @@ import CardEspecialidade from '../components/CardEspecialidade'
 import CardFuncionalidade from '../components/CardFuncionalidade'
 import CardTipoUtilizador from '../components/CardTipoUtilizador';
 import { SlEnergy } from "react-icons/sl"
+import { Link } from 'react-router-dom';
 
 export default function Home(){
     return(
@@ -56,10 +57,9 @@ export default function Home(){
 
                 <div className='flex justify-center items-center'>
                     <div className='grid md:grid-cols-3 max-w-7xl gap-4 mb-8 mx-4'>
-                        <CardEspecialidade img={Cardiologia} type='Cardiologia' text='Cuidados especializados para o coração com tecnologia de monitorização avançada e equipa altamente qualificada.' />
-                        <CardEspecialidade img={Pediatria} type='Pediatria' text='Atendimento especializado para crianças em ambiente acolhedor, com médicos experientes em saúde infantil.' />
-                        <CardEspecialidade img={Ortopedia} type='Ortopedia' text='Tratamento de lesões ósseas e musculares com tecnologia de imagiologia de última geração.' />
-                        
+                        <CardEspecialidade to='/especialidade' img={Cardiologia} type='Cardiologia' text='Cuidados especializados para o coração com tecnologia de monitorização avançada e equipa altamente qualificada.' />
+                        <CardEspecialidade to='/especialidade' img={Pediatria} type='Pediatria' text='Atendimento especializado para crianças em ambiente acolhedor, com médicos experientes em saúde infantil.' />
+                        <CardEspecialidade to='/especialidade' img={Ortopedia} type='Ortopedia' text='Tratamento de lesões ósseas e musculares com tecnologia de imagiologia de última geração.' />
                     </div>
                 </div>
                
@@ -83,9 +83,9 @@ export default function Home(){
                 
                 <div className='flex items-center justify-center pb-8'>
                     <div className='max-w-6xl grid md:grid-cols-3 gap-y-4'>
-                        <CardTipoUtilizador img={pessoaUtente} type='Utentes' p1='Marcação de consultas e exames online' text='Plataforma intuitiva para gestão completa da sua saúde' p2='Acesso total ao RCU digital' p3='Gestão de dados pessoais e histórico' p4='Notificações e lembretes automáticos' textButton='Registar-se Agora' colorBorder='blue' colorButton='blue' />
-                        <CardTipoUtilizador img={pessoalClinico} type='Pessoal Clínico' p1='Dashboard completo de consultas' text='Ferramentas profissionais para gestão clínica eficiente' p2='Actualização e gestão de RCU' p3='Controlo de horários e disponibilidade' p4='Sistema de prescrição electrónica' textButton='Acesso Clínico' colorBorder='green' colorButton='green' />
-                        <CardTipoUtilizador img={pessoalAdministrativo} type='Administrativo' p1='Gestão completa de utilizadores' text='Controlo total da operação hospitalar' p2='Controlo de marcações e cancelamentos' p3='Gestão de horários do pessoal' p4='Relatórios e estatísticas avançadas' textButton='Acesso Admin' colorBorder='blue' colorButton='blue' />
+                        <CardTipoUtilizador to='/registar' img={pessoaUtente} type='Utentes' p1='Marcação de consultas e exames online' text='Plataforma intuitiva para gestão completa da sua saúde' p2='Acesso total ao RCU digital' p3='Gestão de dados pessoais e histórico' p4='Notificações e lembretes automáticos' textButton='Registar-se Agora' colorBorder='blue' colorButton='blue' />
+                        <CardTipoUtilizador to='/registar' img={pessoalClinico} type='Pessoal Clínico' p1='Dashboard completo de consultas' text='Ferramentas profissionais para gestão clínica eficiente' p2='Actualização e gestão de RCU' p3='Controlo de horários e disponibilidade' p4='Sistema de prescrição electrónica' textButton='Acesso Clínico' colorBorder='green' colorButton='green' />
+                        <CardTipoUtilizador to='/registar' img={pessoalAdministrativo} type='Administrativo' p1='Gestão completa de utilizadores' text='Controlo total da operação hospitalar' p2='Controlo de marcações e cancelamentos' p3='Gestão de horários do pessoal' p4='Relatórios e estatísticas avançadas' textButton='Acesso Admin' colorBorder='blue' colorButton='blue' />
                     </div>
                 </div>
             </div>
@@ -96,14 +96,11 @@ export default function Home(){
                     <h1 className='text-white font-semibold text-3xl sm:text-5xl text-center'>Precisa de Ajuda?</h1>
                     <p className='text-center text-white text-xl'>A nossa equipa está disponível 24/7 para responder às suas questões e auxiliar no processo de registo</p>
                     <div className='sm:flex gap-4 items-center justify-center flex-col max-w-full sm:flex-row mx-auto '>
-                        <button className='flex justify-center items-center max-w-80 font-semibold gap-3 border-2 my-2 py-2 px-5 rounded-lg bg-green-500 text-white shadow border-none hover:bg-green-400 transition'>
-                            <PhoneIcon size={17} />
-                            Contactar Suporte
-                        </button>
-                        <button className='flex justify-center items-center max-w-80 font-semibold gap-3 border-2 my-2 border-blue-300 py-2 px-5 rounded-lg text-white bg-gradient-to-b from-blue-400 to-green-400 hover: border-blue-100 transition'>
-                            Registrar Agora
+                       
+                        <Link to={'/registar'}><a className='flex justify-center items-center max-w-80 font-semibold gap-3 border-2 my-2 border-blue-300 py-2 px-5 rounded-lg text-white bg-gradient-to-b from-blue-400 to-green-400 hover: border-blue-100 transition'>
+                            Registar Agora
                             <GoArrowRight size={17} />
-                        </button>
+                        </a></Link>
                     </div>
                 </div>
            </div>
@@ -117,14 +114,14 @@ export default function Home(){
                     <h1 className=' font-bold text-3xl sm:text-5xl text-center'>Pronto para Começar a Sua Jornada de Saúde?</h1>
                     <p className='text-center text-zinc-700 text-xl'>Junte-se a milhares de utentes que já confiam no Sistema de Informação de Saúde PDC.AO para gerir a sua saúde</p>
                     <div className='sm:flex gap-4 items-center justify-center flex-col max-w-full sm:flex-row mx-auto '>
-                        <button className='flex justify-center my-2 items-center max-w-80 font-semibold gap-3 border-2 border-blue-300 py-2 px-5 rounded-lg text-white bg-gradient-to-b from-blue-400 to-green-400 hover: border-blue-100 transition'>
+                        <Link to={'registar'}><button className='flex justify-center my-2 items-center max-w-80 font-semibold gap-3 border-2 border-blue-300 py-2 px-5 rounded-lg text-white bg-gradient-to-b from-blue-400 to-green-400 hover: border-blue-100 transition'>
                             Criar Conta Gratuíta
                             <GoArrowRight size={17} />
-                        </button> 
-                        <button className='flex justify-center my-2 items-center max-w-80 font-semibold gap-3 border-2  py-2 px-5 rounded-lg bg-indigo-50 border-2 border-blue-500 text-blue-500 shadow hover:bg-blue-500 hover:text-white transition'>
+                        </button> </Link>
+                        <Link to={'/especialidade'}><button className='flex justify-center my-2 items-center max-w-80 font-semibold gap-3 border-2  py-2 px-5 rounded-lg bg-indigo-50 border-2 border-blue-500 text-blue-500 shadow hover:bg-blue-500 hover:text-white transition'>
                             <PhoneIcon size={17} />
                             Explorar Especialidades
-                        </button>
+                        </button></Link>
                     </div>
                 </div>
            </div>

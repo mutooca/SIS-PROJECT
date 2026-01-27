@@ -125,8 +125,7 @@ export default function Consulta(){
     }
 
     return(
-        <div>
-            
+        <div> 
             <TitleGestao title="Consultas Agendadas" p="Gerencie suas consultas"/>
         
             <div className="space-y-4">

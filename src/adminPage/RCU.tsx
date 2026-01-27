@@ -6,77 +6,63 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
 import TitleGestao from "../components/TitleGestao";
 
-// ==================== INTERFACES ====================
-
 interface HistoricoConsulta {
-  data: string;
-  especialidade: string;
-  medico: string;
-  status: 'Realizada' | 'Cancelada' | 'Reagendada';
+  data: string
+  especialidade: string
+  medico: string
+  status: 'Realizada' | 'Cancelada' | 'Reagendada'
 }
 
 interface HistoricoExame {
-  data: string;
-  exame: string;
-  status: 'Realizada' | 'Cancelado' | 'Reagendada';
+  data: string
+  exame: string
+  status: 'Realizada' | 'Cancelado' | 'Reagendada'
 }
 
 interface Utente {
-  id: number;
-  nome: string;
-  numeroIdentificador: string;
-  nomeEntidade: string;
-  numeroEntidade: string;
-  email: string;
-  telefone: string;
-  dataRegisto: string;
-  historicoConsultas: HistoricoConsulta[];
-  historicoExames: HistoricoExame[];
+  id: number
+  nome: string
+  numeroIdentificador: string
+  nomeEntidade: string
+  numeroEntidade: string
+  email: string
+  telefone: string
+  dataRegisto: string
+  historicoConsultas: HistoricoConsulta[]
+  historicoExames: HistoricoExame[]
 }
 
-// ==================== FUNÇÕES DE SANITIZAÇÃO ====================
 
 const sanitizeText = (value: string) => {
-  if (!value) return '';
-  return value.trim().replace(/\s+/g, ' ').replace(/[<>'"]/g, '').slice(0, 500);
-};
-
-const sanitizeNumberString = (value: string) => {
-  if (!value) return '';
-  return value.replace(/\D/g, '').slice(0, 20);
+  if (!value) return ''
+  return value.trim().replace(/\s+/g, ' ').replace(/[<>'"()]/g, '').slice(0, 500)
 }
 
+const sanitizeNumberString = (value: string) => {
+  if (!value) return ''
+  return value.replace(/\D/g, '').slice(0, 20)
+}
 
 const entidadeFinanceiraSchema = z.object({
-  nomeEntidade: z.string()
-    .min(1, 'A entidade financeira é obrigatória')
-    .transform(sanitizeText)
-    .refine(val => val.length > 0, 'A entidade não pode estar vazia')
+  nomeEntidade: z.string().min(1, 'A entidade financeira é obrigatória').transform(sanitizeText).refine(val => val.length > 0, 'A entidade não pode estar vazia')
     .pipe(
       z.string()
         .min(3, 'O nome da entidade deve ter no mínimo 3 caracteres')
-        .max(100, 'O nome da entidade é demasiado longo')
+        .max(100, 'O nome da entidade é demasiado longo').regex(/^[A-Za-zÀ-Ù0-9\s]+$/, 'O nome da entidade contém caracteres inválidos' )
     ),
   
-  numeroEntidade: z.string()
-    .min(1, 'O número na entidade é obrigatório')
-    .transform(sanitizeNumberString)
-    .refine(val => val.length > 0, 'O número não pode estar vazio')
+  numeroEntidade: z.string().min(1, 'O número na entidade é obrigatório').transform(sanitizeNumberString).refine(val => val.length > 0, 'O número não pode estar vazio')
     .pipe(
-      z.string()
-        .min(3, 'O número na entidade deve ter no mínimo 3 caracteres')
-        .max(20, 'O número na entidade é demasiado longo')
+      z.string().min(3, 'O número na entidade deve ter no mínimo 3 caracteres')
+        .max(20, 'O número na entidade é demasiado longo').regex(/^[A-Za-z0-9\s]+$/, 'O número na entidade contém caracteres inválidos' )
     ),
   
-  observacoes: z.string()
-    .transform(sanitizeText)
+  observacoes: z.string().transform(sanitizeText)
     .pipe(
       z.string()
-        .max(500, 'As observações não podem ultrapassar 500 caracteres')
-    )
-    .optional()
-    .or(z.literal(''))
-});
+        .max(500, 'As observações não podem ultrapassar 500 caracteres').regex(/^[A-Za-zÀ-ÿ0-9\s.,:?!-]*$/, 'As observações contêm caracteres inválidos')
+    ).optional().or(z.literal(''))
+})
 
 type EntidadeFinanceiraData = z.infer<typeof entidadeFinanceiraSchema>
 
@@ -211,12 +197,11 @@ const utentes: Utente[] = [
       }
     ]
   }
-];
-
+]
 
 export default function RCU() {
-  const [search, setSearch] = useState("");
-  const [selectedUtente, setSelectedUtente] = useState<Utente | null>(null);
+  const [search, setSearch] = useState("")
+  const [selectedUtente, setSelectedUtente] = useState<Utente | null>(null)
 
   const {
     register: registerEntidade,
@@ -225,64 +210,54 @@ export default function RCU() {
   } = useForm<EntidadeFinanceiraData>({
     resolver: zodResolver(entidadeFinanceiraSchema),
     mode: 'onBlur'
-  });
+  })
 
-  // Funções auxiliares
   function normalizeString(str: string) {
-    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
   }
 
   const filteredUtentes = utentes.filter((u) =>
-    normalizeString(u.nome).includes(normalizeString(search))
-  );
-
-  // Handler
+    normalizeString(u.nome).includes(sanitizeText(search))
+    )
   async function handleEntidadeFinanceira(data: EntidadeFinanceiraData) {
     try {
-      console.log('Dados validados e sanitizados:', data);
-      toast.loading('Atualizando dados administrativos...');
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      toast.dismiss();
-      toast.success('Dados administrativos atualizados com sucesso!');
+      console.log('Dados validados e sanitizados:', data)
+      toast.loading('Actualizando dados administrativos...')
+      await new Promise(resolve => setTimeout(resolve, 1000))
+      toast.dismiss()
+      toast.success('Dados administrativos actualizados com sucesso!');
 
       if (selectedUtente) {
         setSelectedUtente({
           ...selectedUtente,
           nomeEntidade: data.nomeEntidade,
           numeroEntidade: data.numeroEntidade
-        });
+        })
       }
     } catch (error) {
-      toast.dismiss();
-      toast.error('Erro ao atualizar dados administrativos.');
-      console.error(error);
+      toast.dismiss()
+      toast.error('Erro ao atualizar dados administrativos.')
+      console.error(error)
     }
   }
 
   return (
     <div>
-      {/* ==================== SEÇÃO: LISTA DE UTENTES ==================== */}
-      <div className="min-h-screen bg-indigo-50 p-6">
-        <div className="p-6">
-          <TitleGestao title="Gestão de RCU" p="Consultar e actualizar apenas dados administrativos" />
-        </div>
+          <TitleGestao title="Gestão de RCU" p="Consultar utentes e actualizar apenas dados administrativos" />
 
-        <div className="max-w-6xl mx-auto bg-white rounded-xl shadow p-6">
-          {/* Barra de Pesquisa */}
+        <div className="max-w-7xl mx-auto bg-white rounded-xl shadow p-4">
           <div className="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <input
               type="text"
               placeholder="Pesquisar por nome do utente"
-              value={search}
+              value={search} 
               onChange={(e) => setSearch(e.target.value)}
-              className="h-11 px-4 rounded-lg border bg-indigo-50 outline-blue-500 w-full sm:max-w-sm"
-            />
+              className="h-11 px-4 rounded-lg border bg-indigo-50 outline-blue-500 w-full sm:max-w-sm"/>
             <span className="text-sm text-gray-500">
               Total: {filteredUtentes.length} utente(s)
             </span>
           </div>
 
-          {/* Tabela */}
           <div className="overflow-x-auto">
             <table className="w-full border-collapse">
               <thead>
@@ -306,8 +281,7 @@ export default function RCU() {
                 {filteredUtentes.map((utente) => (
                   <tr
                     key={utente.id}
-                    className="border-b hover:bg-indigo-50 transition text-sm"
-                  >
+                    className="border-b hover:bg-indigo-50 transition text-sm">
                     <td className="p-3 font-medium">{utente.nome}</td>
                     <td className="p-3">{utente.email}</td>
                     <td className="p-3">{utente.telefone}</td>
@@ -315,8 +289,7 @@ export default function RCU() {
                     <td className="p-3 text-center">
                       <button
                         onClick={() => setSelectedUtente(utente)}
-                        className="text-blue-600 font-semibold hover:underline"
-                      >
+                        className="text-blue-600 font-semibold hover:underline">
                         Gerir RCU
                       </button>
                     </td>
@@ -329,7 +302,7 @@ export default function RCU() {
 
         {selectedUtente && (
           <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-xl shadow-xl w-full max-w-6xl max-h-[90vh] overflow-y-auto">
+            <div className="bg-zinc-50 rounded-xl shadow-xl w-full max-w-6xl max-h-[90vh] overflow-y-auto">
               <div className="sticky top-0 bg-white z-10 p-6 border-b">
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
@@ -342,8 +315,7 @@ export default function RCU() {
                   </div>
                   <button
                     onClick={() => setSelectedUtente(null)}
-                    className="hover:text-red-700 text-gray-600 text-2xl font-bold flex-shrink-0"
-                  >
+                    className="hover:text-red-700 text-gray-600 text-2xl font-bold flex-shrink-0">
                     <FiX />
                   </button>
                 </div>
@@ -373,8 +345,7 @@ export default function RCU() {
                         defaultValue={selectedUtente.nomeEntidade}
                         placeholder="ACMS Seguros"
                         className="max-w-full h-12 border bg-zinc-50 rounded-lg pl-4 outline-blue-500 border"
-                        disabled={isSubmittingEntidade}
-                      />
+                        disabled={isSubmittingEntidade}/>
                       {errorsEntidade.nomeEntidade && <p className='text-xs text-red-600'>{errorsEntidade.nomeEntidade.message}</p>}
                     </div>
                     <div className="space-y-1 flex flex-col w-full">
@@ -386,8 +357,7 @@ export default function RCU() {
                         defaultValue={selectedUtente.numeroEntidade}
                         placeholder="SEG789456"
                         className="max-w-full h-12 border bg-zinc-50 rounded-lg pl-4 outline-blue-500 border"
-                        disabled={isSubmittingEntidade}
-                      />
+                        disabled={isSubmittingEntidade} />
                       {errorsEntidade.numeroEntidade && <p className='text-xs text-red-600'>{errorsEntidade.numeroEntidade.message}</p>}
                     </div>
                   </div>
@@ -399,16 +369,14 @@ export default function RCU() {
                       rows={3}
                       className="max-w-full border bg-zinc-50 rounded-lg pl-4 pt-2 outline-blue-500 border"
                       placeholder="Notas administrativas sobre o utente"
-                      disabled={isSubmittingEntidade}
-                    />
+                      disabled={isSubmittingEntidade}/>
                     {errorsEntidade.observacoes && <p className='text-xs text-red-600'>{errorsEntidade.observacoes.message}</p>}
                   </div>
                   <button
                     type="submit"
                     disabled={isSubmittingEntidade}
-                    className="bg-blue-500 text-white hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed w-full h-12 rounded-xl font-semibold transition"
-                  >
-                    {isSubmittingEntidade ? 'Atualizando...' : 'Atualizar Dados Administrativos'}
+                    className="bg-blue-500 text-white hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed w-full h-12 rounded-xl font-semibold transition">
+                    {isSubmittingEntidade ? 'Actualizando...' : 'Actualizar Dados Administrativos'}
                   </button>
                 </form>
 
@@ -468,19 +436,16 @@ export default function RCU() {
                 </div>
               </div>
 
-              {/* Footer do Modal */}
               <div className="sticky bottom-0 bg-white border-t p-4 flex justify-end">
                 <button
                   onClick={() => setSelectedUtente(null)}
-                  className="px-6 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 font-semibold transition"
-                >
+                  className="px-6 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 font-semibold transition">
                   Fechar
                 </button>
               </div>
             </div>
           </div>
         )}
-      </div>
     </div>
   )
 }

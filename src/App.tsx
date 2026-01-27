@@ -32,7 +32,6 @@ import ConsultasTab from "./utentePage/ConsultasTab";
 import ExamesTab from "./utentePage/ExamesTab";
 import PerfilTab from "./utentePage/PerfilTab";
 import RcuTab from "./utentePage/RcuTab";
-import ViewUtentesCadastrados from "./adminPage/ViewUtentesCadastrados"
 
 function App() {
   const location = useLocation()
@@ -80,7 +79,6 @@ function App() {
           <Route path="marcacao" element={<Marcacao />} />
           <Route path="rcu" element={<RCU />} />
           <Route path="config" element={<Config />} />
-          <Route path="viewutentes" element={<ViewUtentesCadastrados />} />
 
         </Route>
 

@@ -22,7 +22,7 @@ const sanitizeName = (value: string) => {
 
 const createNewEspecialidadeSchema = z.object({
     nome: z.string().min(1, 'O nome da especialidade é obrigatório').transform(sanitizeName).refine(val => val.length > 0, 'O nome da especialidade não pode estar vazio após sanitização')
-      .pipe(  z.string().min(3, 'A especialidade deve ter no mínimo 3 caracteres').max(100, 'O nome da especialidade é demasiado longo').regex(/^[A-Za-zÀ-ÿ\s]+$/, 'O nome contém caracteres inválidos')
+      .pipe(z.string().min(3, 'A especialidade deve ter no mínimo 3 caracteres').max(100, 'O nome da especialidade é demasiado longo').regex(/^[A-Za-zÀ-ÿ\s]+$/, 'O nome contém caracteres inválidos')
         ),
     descricao: z.string().min(1, 'A descrição não pode estar vazia').transform(sanitizeText).refine(val => val.length > 0, 'A descrição não pode estar vazia após sanitização')
       .pipe(z.string().min(10, 'A descrição deve ter no mínimo 10 caracteres').max(50, 'A descrição é demasiado longa')),

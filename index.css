@@ -1,0 +1,31 @@
+/* RESET GLOBAL */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* EVITAR QUEBRA HORIZONTAL */
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+/* GARANTIR RESPONSIVIDADE */
+img, picture, video, canvas {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* TIPOGRAFIA BASE */
+body {
+  font-family: sans-serif;
+  line-height: 1.5;
+}
+
+/* NUNCA DEIXAR ELEMENTOS ULTRAPASSAREM A TELA */
+* {
+  max-width: 100%;
+}
